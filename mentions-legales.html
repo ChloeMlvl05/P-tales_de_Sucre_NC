@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentions légales — Pétales de Sucre</title>
+  <link rel="icon" type="image/png" href="images/Logo.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px
+    }
+
+    img {
+      display: block;
+      max-width: 100%
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-family: inherit
+    }
+
+    :root {
+      --t: #E67058;
+      --c: #E8A88B;
+      --g: #C9A24D;
+      --gl: #F0D080;
+      --gd: #A8842A;
+      --gg: linear-gradient(135deg, #C9A24D 0%, #F0D080 38%, #A8842A 65%, #E8C96A 100%);
+      --tg: linear-gradient(135deg, #E67058, #C95640);
+      --br: 18px;
+      --br2: 12px;
+    }
+
+    :root,
+    html[data-theme="dark"] {
+      --n: #1C1612;
+      --n2: #251D16;
+      --f: #FAF3EE;
+      --f2: #F5E9DF;
+      --nu: #F2DDD0;
+      --tx: #F2EDE8;
+      --tm: #C8B8A8;
+      --tx-m: #A09080;
+      --tx-s: #706050;
+      --bg-body: #1C1612;
+      --bg-card: #2A2018;
+      --bd-card: rgba(242, 237, 232, .12);
+      --bd-sep: rgba(242, 237, 232, .08);
+      --nav-bg-scroll: rgba(28, 22, 18, .95);
+      --nav-link: #A09080;
+      --nav-link-h: #F2EDE8;
+      --footer-bg: #141008;
+      --footer-bd-top: rgba(201, 162, 77, .2);
+      --ft-tag-color: #A09080;
+      --ft-colttl-color: #C8B8A8;
+      --ft-links-color: #C8B8A8;
+      --ft-info-color: #A09080;
+      --ft-extra-color: #706050;
+      --ft-bot-bd: rgba(242, 237, 232, .08);
+      --ft-copy-color: #706050;
+      --ft-made-color: #605040;
+      --soc-bg: rgba(242, 237, 232, .06);
+      --soc-bd: rgba(242, 237, 232, .12);
+      --soc-img-filter: brightness(0) saturate(100%) invert(72%) sepia(10%) saturate(300%) hue-rotate(10deg) brightness(95%);
+      --soc-img-filter-hover: brightness(0) saturate(100%) invert(72%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(110%);
+      --page-hero-bg: linear-gradient(160deg, #181310 0%, #221A14 100%);
+      --card-bg: #2A2018;
+      --card-bd: rgba(242, 237, 232, .1);
+      --acc-bg: rgba(201, 162, 77, .08);
+      --acc-bd: rgba(201, 162, 77, .2);
+      --tag-bg: rgba(242, 237, 232, .07);
+      --tag-color: #C8B8A8;
+    }
+
+    html[data-theme="light"] {
+      --n: #FAF3EE;
+      --n2: #F5E9DF;
+      --tx: #1A1008;
+      --tm: #5C3D2E;
+      --tx-m: rgba(90, 50, 30, .65);
+      --tx-s: rgba(90, 50, 30, .38);
+      --bg-body: #FAF3EE;
+      --bg-card: #FFFFFF;
+      --bd-card: rgba(90, 50, 30, .1);
+      --bd-sep: rgba(90, 50, 30, .08);
+      --nav-bg-scroll: rgba(250, 243, 238, .96);
+      --nav-link: rgba(26, 16, 8, .55);
+      --nav-link-h: #1A1008;
+      --footer-bg: #ECD8C8;
+      --footer-bd-top: rgba(201, 162, 77, .2);
+      --ft-tag-color: rgba(90, 50, 30, .5);
+      --ft-colttl-color: rgba(90, 50, 30, .45);
+      --ft-links-color: rgba(90, 50, 30, .6);
+      --ft-info-color: rgba(90, 50, 30, .5);
+      --ft-extra-color: rgba(90, 50, 30, .4);
+      --ft-bot-bd: rgba(90, 50, 30, .1);
+      --ft-copy-color: rgba(90, 50, 30, .4);
+      --ft-made-color: rgba(90, 50, 30, .35);
+      --soc-bg: rgba(90, 50, 30, .06);
+      --soc-bd: rgba(90, 50, 30, .12);
+      --soc-img-filter: brightness(0) saturate(100%) sepia(30%) saturate(400%) hue-rotate(340deg) brightness(40%);
+      --soc-img-filter-hover: brightness(0) saturate(100%) invert(62%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(100%);
+      --page-hero-bg: linear-gradient(160deg, #F0DDD0 0%, #FAF3EE 100%);
+      --card-bg: #FFFFFF;
+      --card-bd: rgba(90, 50, 30, .1);
+      --acc-bg: rgba(201, 162, 77, .07);
+      --acc-bd: rgba(201, 162, 77, .2);
+      --tag-bg: rgba(230, 112, 88, .07);
+      --tag-color: #5C3D2E;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -300% center
+      }
+
+      100% {
+        background-position: 300% center
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes floatY {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-10px)
+      }
+    }
+
+    body {
+      background: var(--bg-body);
+      color: var(--tx);
+      transition: background .45s ease, color .45s ease
+    }
+
+    body * {
+      transition-property: background, border-color, color;
+      transition-duration: .4s;
+      transition-timing-function: ease
+    }
+
+    /* ── Cursor ── */
+    .cur {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--g);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%)
+    }
+
+    .cur-r {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(201, 162, 77, .4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%)
+    }
+
+    /* ── Gold bar ── */
+    .gbar {
+      height: 3px;
+      background: linear-gradient(90deg, #C9A24D, #F0D080, #C9A24D, #A8842A, #F0D080, #C9A24D);
+      background-size: 400%;
+      animation: shimmer 4s linear infinite
+    }
+
+    /* ── Navbar ── */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+      transition: background .4s, backdrop-filter .4s, box-shadow .4s
+    }
+
+    #nav.s {
+      background: var(--nav-bg-scroll);
+      backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: 0 1px 0 rgba(201, 162, 77, .15)
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 800;
+      background: var(--gg);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 6s linear infinite;
+      letter-spacing: .5px
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none
+    }
+
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--nav-link);
+      position: relative;
+      transition: color .3s
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--g);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .nav-links a:hover {
+      color: var(--nav-link-h)
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1)
+    }
+
+    .nav-order {
+      background: transparent;
+      border: 1px solid rgba(201, 162, 77, .5);
+      color: var(--g) !important;
+      padding: 8px 22px;
+      border-radius: 30px;
+      transition: background .3s, border-color .3s !important
+    }
+
+    .nav-order:hover {
+      background: rgba(201, 162, 77, .1) !important;
+      border-color: var(--g) !important
+    }
+
+    .nav-order::after {
+      display: none !important
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: none;
+      border: 1px solid rgba(201, 162, 77, .35);
+      border-radius: 30px;
+      padding: 6px 14px 6px 10px;
+      cursor: pointer;
+      transition: border-color .3s, background .3s;
+      flex-shrink: 0
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--g);
+      background: rgba(201, 162, 77, .08)
+    }
+
+    .tt-track {
+      width: 34px;
+      height: 18px;
+      border-radius: 9px;
+      background: rgba(201, 162, 77, .2);
+      border: 1px solid rgba(201, 162, 77, .3);
+      position: relative;
+      flex-shrink: 0;
+      transition: background .35s, border-color .35s
+    }
+
+    .tt-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--g);
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform .35s cubic-bezier(.16, 1, .3, 1), background .35s
+    }
+
+    html[data-theme="dark"] .tt-thumb {
+      transform: translateX(0)
+    }
+
+    html[data-theme="light"] .tt-thumb {
+      transform: translateX(16px);
+      background: var(--t)
+    }
+
+    html[data-theme="light"] .tt-track {
+      background: rgba(230, 112, 88, .18);
+      border-color: rgba(230, 112, 88, .3)
+    }
+
+    .tt-icon {
+      font-size: 12px;
+      transition: opacity .3s;
+      line-height: 1
+    }
+
+    html[data-theme="dark"] .tt-icon-d {
+      opacity: 1
+    }
+
+    html[data-theme="dark"] .tt-icon-l {
+      opacity: .3
+    }
+
+    html[data-theme="light"] .tt-icon-d {
+      opacity: .3
+    }
+
+    html[data-theme="light"] .tt-icon-l {
+      opacity: 1
+    }
+
+    .tt-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color .35s
+    }
+
+    html[data-theme="dark"] .tt-label {
+      color: var(--g)
+    }
+
+    html[data-theme="light"] .tt-label {
+      color: var(--t)
+    }
+
+    /* ── Page hero banner ── */
+    .page-hero {
+      background: var(--page-hero-bg);
+      padding: 120px 52px 72px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(201, 162, 77, .1) 0%, transparent 65%);
+      pointer-events: none
+    }
+
+    .page-hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      animation: fadeUp .8s cubic-bezier(.16, 1, .3, 1) both
+    }
+
+    .breadcrumb {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--tx-m);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .breadcrumb a {
+      color: var(--g);
+      transition: color .3s
+    }
+
+    .breadcrumb a:hover {
+      color: var(--gl)
+    }
+
+    .breadcrumb-sep {
+      opacity: .4
+    }
+
+    .page-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--t);
+      margin-bottom: 14px
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--tx);
+      line-height: 1.1;
+      margin-bottom: 16px
+    }
+
+    .page-title .gt {
+      background: var(--gg);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s linear infinite
+    }
+
+    .page-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      color: var(--tm);
+      line-height: 1.75;
+      max-width: 560px
+    }
+
+    .page-meta {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      color: var(--tx-s);
+      margin-top: 12px;
+      letter-spacing: .5px
+    }
+
+    /* ── Content layout ── */
+    .page-content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 52px 80px
+    }
+
+    .section-block {
+      margin-bottom: 52px
+    }
+
+    .section-block:last-child {
+      margin-bottom: 0
+    }
+
+    /* ── Titres sections ── */
+    .s-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--tx);
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--bd-sep);
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .s-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gg);
+      background-size: 200%;
+      animation: shimmer 5s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #1A1008;
+      flex-shrink: 0
+    }
+
+    .s-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--tx);
+      margin: 28px 0 12px;
+      font-style: italic
+    }
+
+    /* ── Texte corps ── */
+    p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: var(--tm);
+      line-height: 1.9;
+      margin-bottom: 14px
+    }
+
+    p:last-child {
+      margin-bottom: 0
+    }
+
+    strong {
+      font-weight: 700;
+      color: var(--tx)
+    }
+
+    a.inline-link {
+      color: var(--g);
+      text-decoration: underline;
+      text-decoration-color: rgba(201, 162, 77, .35);
+      transition: color .3s, text-decoration-color .3s
+    }
+
+    a.inline-link:hover {
+      color: var(--gl);
+      text-decoration-color: var(--gl)
+    }
+
+    /* ── Cards info ── */
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-bd);
+      border-radius: var(--br2);
+      padding: 24px 28px;
+      margin-bottom: 16px
+    }
+
+    .info-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--tx);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .ic-icon {
+      font-size: 18px
+    }
+
+    .info-card p {
+      font-size: 13px
+    }
+
+    /* ── Cards accent or ── */
+    .accent-card {
+      background: var(--acc-bg);
+      border: 1px solid var(--acc-bd);
+      border-radius: var(--br2);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      border-left: 3px solid var(--g)
+    }
+
+    .accent-card p {
+      color: var(--tm);
+      font-size: 13px
+    }
+
+    .accent-card strong {
+      color: var(--tx)
+    }
+
+    /* ── Grilles ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0
+    }
+
+    /* ── FAQ items ── */
+    .faq-item {
+      border: 1px solid var(--card-bd);
+      border-radius: var(--br2);
+      overflow: hidden;
+      margin-bottom: 12px
+    }
+
+    .faq-q {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--tx);
+      padding: 18px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      transition: background .3s
+    }
+
+    .faq-q:hover {
+      background: rgba(201, 162, 77, .06)
+    }
+
+    .faq-q::after {
+      content: '＋';
+      font-size: 18px;
+      color: var(--g);
+      flex-shrink: 0;
+      transition: transform .3s
+    }
+
+    .faq-item.open .faq-q {
+      background: rgba(201, 162, 77, .08)
+    }
+
+    .faq-item.open .faq-q::after {
+      transform: rotate(45deg)
+    }
+
+    .faq-a {
+      display: none;
+      padding: 0 24px 20px;
+      background: var(--card-bg)
+    }
+
+    .faq-item.open .faq-a {
+      display: block
+    }
+
+    .faq-a p {
+      font-size: 13px;
+      color: var(--tm);
+      margin-top: 4px
+    }
+
+    /* ── Tags ── */
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: var(--tag-bg);
+      color: var(--tag-color);
+      border: 1px solid rgba(201, 162, 77, .15);
+      border-radius: 20px;
+      padding: 5px 14px
+    }
+
+    /* ── Table ── */
+    .legal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px
+    }
+
+    .legal-table th {
+      background: rgba(201, 162, 77, .1);
+      color: var(--tx);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--acc-bd)
+    }
+
+    .legal-table td {
+      padding: 12px 16px;
+      color: var(--tm);
+      border-bottom: 1px solid var(--bd-sep)
+    }
+
+    .legal-table tr:last-child td {
+      border-bottom: none
+    }
+
+    .legal-table tr:hover td {
+      background: rgba(201, 162, 77, .04)
+    }
+
+    /* ── Alerte / notice ── */
+    .notice {
+      background: rgba(230, 112, 88, .08);
+      border: 1px solid rgba(230, 112, 88, .2);
+      border-radius: var(--br2);
+      padding: 18px 22px;
+      margin: 20px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start
+    }
+
+    .notice-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    .notice p {
+      color: var(--tm);
+      font-size: 13px;
+      margin: 0
+    }
+
+    .notice-success {
+      background: rgba(58, 138, 94, .08);
+      border-color: rgba(58, 138, 94, .2)
+    }
+
+    /* ── Scroll reveal ── */
+    .rv {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .rv.d1 {
+      transition-delay: .08s
+    }
+
+    .rv.d2 {
+      transition-delay: .16s
+    }
+
+    .rv.d3 {
+      transition-delay: .24s
+    }
+
+    .rv.d4 {
+      transition-delay: .32s
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--footer-bg);
+      padding: 52px 52px 28px;
+      border-top: 1px solid var(--footer-bd-top)
+    }
+
+    .ft-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 48px
+    }
+
+    .ft-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      background: var(--gg);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 6s linear infinite;
+      margin-bottom: 12px
+    }
+
+    .ft-tag {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ft-tag-color);
+      margin-bottom: 20px
+    }
+
+    .ft-socials {
+      display: flex;
+      gap: 10px
+    }
+
+    .soc {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--soc-bg);
+      border: 1px solid var(--soc-bd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px;
+      overflow: hidden;
+      transition: background .3s, border-color .3s, box-shadow .3s
+    }
+
+    .soc img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: var(--soc-img-filter);
+      transition: filter .3s
+    }
+
+    .soc:hover {
+      background: rgba(201, 162, 77, .12);
+      border-color: rgba(201, 162, 77, .45);
+      box-shadow: 0 4px 16px rgba(201, 162, 77, .18)
+    }
+
+    .soc:hover img {
+      filter: var(--soc-img-filter-hover)
+    }
+
+    .ft-col-ttl {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--ft-colttl-color);
+      margin-bottom: 16px
+    }
+
+    .ft-links {
+      display: flex;
+      flex-direction: column;
+      gap: 9px
+    }
+
+    .ft-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: var(--ft-links-color);
+      transition: color .3s
+    }
+
+    .ft-links a:hover {
+      color: var(--g)
+    }
+
+    .ft-links a.active {
+      color: var(--g)
+    }
+
+    .ft-info p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      color: var(--ft-info-color);
+      margin-bottom: 7px;
+      line-height: 1.5
+    }
+
+    .ft-bot {
+      border-top: 1px solid var(--ft-bot-bd);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .ft-copy {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      color: var(--ft-copy-color);
+      letter-spacing: .5px
+    }
+
+    .ft-made {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      color: var(--ft-made-color)
+    }
+
+    .ft-made span {
+      color: rgba(201, 162, 77, .5)
+    }
+
+    @media(max-width:768px) {
+      #nav {
+        padding: 0 20px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .page-hero {
+        padding: 100px 20px 48px
+      }
+
+      .page-title {
+        font-size: 32px
+      }
+
+      .page-content {
+        padding: 40px 20px 60px
+      }
+
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr
+      }
+
+      .ft-top {
+        grid-template-columns: 1fr;
+        gap: 32px
+      }
+
+      footer {
+        padding: 40px 20px 24px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cur" id="cur"></div>
+  <div class="cur-r" id="curR"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">Pétales de Sucre</a>
+    <ul class="nav-links">
+      <li><a href="index.html#boutique">Boutique</a></li>
+      <li><a href="index.html#histoire">Notre Histoire</a></li>
+      <li><a href="index.html#entreprises">Entreprises</a></li>
+      <li><a href="index.html#commande" class="nav-order">Commander</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Changer de thème">
+      <span class="tt-icon tt-icon-d">🌙</span>
+      <div class="tt-track">
+        <div class="tt-thumb"></div>
+      </div>
+      <span class="tt-icon tt-icon-l">☀️</span>
+      <span class="tt-label" id="ttLabel">Prestige</span>
+    </button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Mentions légales</span>
+      </div>
+      <div class="page-eyebrow">Informations légales</div>
+      <h1 class="page-title">Mentions <span class='gt'>légales</span></h1>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <div class="section-block rv">
+      <div class="s-title"><span class="s-num">1</span>Éditeur du site</div>
+      <div class="info-card">
+        <div class="info-card-title"><span class="ic-icon">🏢</span>Informations sur l'entreprise</div>
+        <table class="legal-table">
+          <tbody>
+            <tr>
+              <td><strong>Dénomination</strong></td>
+              <td>Pétales de Sucre</td>
+            </tr>
+            <tr>
+              <td><strong>Forme juridique</strong></td>
+              <td>Entreprise individuelle</td>
+            </tr>
+            <tr>
+              <td><strong>Activité</strong></td>
+              <td>Fabrication et vente de bouquets de crêpes artisanaux</td>
+            </tr>
+            <tr>
+              <td><strong>Siège social</strong></td>
+              <td>Dumbéa, Nouvelle-Calédonie</td>
+            </tr>
+            <tr>
+              <td><strong>Email</strong></td>
+              <td><a href="mailto:Petales2Sucre@gmail.com" class="inline-link">Petales2Sucre@gmail.com</a></td>
+            </tr>
+            <tr>
+              <td><strong>Site web</strong></td>
+              <td>www.PetaleDeSucre.nc</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-block rv d1">
+      <div class="s-title"><span class="s-num">2</span>Directeur de la publication</div>
+      <p>Le directeur de la publication est la gérante de Pétales de Sucre, joignable à l'adresse email <a
+          href="mailto:Petales2Sucre@gmail.com" class="inline-link">Petales2Sucre@gmail.com</a>.</p>
+    </div>
+
+    <div class="section-block rv d2">
+      <div class="s-title"><span class="s-num">3</span>Conception & réalisation</div>
+      <div class="info-card">
+        <div class="info-card-title"><span class="ic-icon">🎨</span>Agence de création</div>
+        <table class="legal-table">
+          <tbody>
+            <tr>
+              <td><strong>Agence</strong></td>
+              <td>Coco DesigNC</td>
+            </tr>
+            <tr>
+              <td><strong>Territoire</strong></td>
+              <td>Nouvelle-Calédonie</td>
+            </tr>
+            <tr>
+              <td><strong>Prestation</strong></td>
+              <td>Identité visuelle, charte graphique, conception et développement web</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-block rv d3">
+      <div class="s-title"><span class="s-num">4</span>Propriété intellectuelle</div>
+      <p>L'ensemble des éléments constituant ce site web — textes, visuels, illustrations, logotypes, structure
+        graphique, animations et code source — est la propriété exclusive de <strong>Pétales de Sucre</strong> et de
+        <strong>Coco DesigNC</strong>, et est protégé par les lois applicables en Nouvelle-Calédonie relatives à la
+        propriété intellectuelle.</p>
+      <p>Toute reproduction, représentation, modification, publication, transmission ou utilisation, totale ou
+        partielle, de l'un quelconque de ces éléments, quel qu'en soit le support ou le procédé, est <strong>strictement
+          interdite</strong> sans autorisation écrite préalable.</p>
+      <div class="accent-card">
+        <p><strong>Marque :</strong> Le nom "Pétales de Sucre", le logo associé et les slogans "L'élégance à croquer.",
+          "Dites-le avec gourmandise." et "Le premier bouquet qui se partage." sont des éléments d'identité propres à
+          Pétales de Sucre. Toute utilisation non autorisée pourra faire l'objet de poursuites.</p>
+      </div>
+    </div>
+
+    <div class="section-block rv d4">
+      <div class="s-title"><span class="s-num">5</span>Responsabilité</div>
+      <p>Pétales de Sucre s'efforce de maintenir les informations présentes sur ce site à jour et exactes. Toutefois,
+        nous ne pouvons garantir l'exactitude, la complétude ou l'actualité des informations diffusées. En conséquence,
+        l'utilisateur reconnaît utiliser ces informations sous sa propre responsabilité.</p>
+      <p>Pétales de Sucre ne saurait être tenue responsable des dommages directs ou indirects résultant de l'accès ou de
+        l'utilisation de ce site, y compris l'inaccessibilité, les pertes de données ou tout autre préjudice.</p>
+    </div>
+
+    <div class="section-block rv d4">
+      <div class="s-title"><span class="s-num">6</span>Droit applicable</div>
+      <p>Le présent site et ses mentions légales sont soumis au droit applicable en <strong>Nouvelle-Calédonie</strong>.
+        Tout litige relatif à l'utilisation de ce site sera soumis à la compétence exclusive des tribunaux compétents du
+        ressort de Nouméa.</p>
+      <p>Date de dernière mise à jour des mentions légales : <strong>Mars 2026</strong>.</p>
+    </div>
+
+  </div>
+
+  <div class="gbar"></div>
+  <footer>
+    <div class="ft-top">
+      <div>
+        <div class="ft-brand">Pétales de Sucre</div>
+        <div class="ft-tag">L'élégance à croquer.</div>
+        <div class="ft-socials">
+          <a href="#" class="soc" aria-label="Instagram"><img src="images/icone_insta.png" alt="Instagram"></a>
+          <a href="#" class="soc" aria-label="Facebook"><img src="images/icone_fb.png" alt="Facebook"></a>
+          <a href="#" class="soc" aria-label="TikTok"><img src="images/icone_tiktok.png" alt="TikTok"></a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-ttl">Navigation</div>
+        <div class="ft-links">
+          <a href="index.html#boutique">Notre Boutique</a>
+          <a href="index.html#config">Configurateur</a>
+          <a href="index.html#histoire">Notre Histoire</a>
+          <a href="index.html#entreprises">Entreprises</a>
+          <a href="index.html#commande">Commander</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-ttl">Informations</div>
+        <div class="ft-links">
+          <a href="click-and-collect.html">Clic &amp; Collect</a>
+          <a href="faq.html">FAQ</a>
+          <a href="politique-retour.html">Politique de retour</a>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="conditions-vente.html">Conditions de vente</a>
+          <a href="rgpd.html">Politique RGPD</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-ttl">Contact</div>
+        <div class="ft-info">
+          <p>Dumbéa, Nouvelle-Calédonie</p>
+          <p>Petales2Sucre@gmail.com</p>
+          <p>www.PetalesDeSucre.nc</p>
+          <p style="margin-top:12px;font-size:11px;color:var(--ft-extra-color)">Clic &amp; Collect — Atelier
+            Dumbéa<br>Lun–Sam · 8h–18h<br>Sur créneau réservé en ligne</p>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">© 2026 Pétales de Sucre · Tous droits réservés</div>
+      <div class="ft-made">Réalisé par <span>Coco DesigNC</span> · Nouvelle-Calédonie</div>
+    </div>
+  </footer>
+
+  <script>
+    const cur = document.getElementById('cur'), curR = document.getElementById('curR');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+    (function anim() {
+      cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+      rx += (mx - rx) * .13; ry += (my - ry) * .13;
+      curR.style.left = rx + 'px'; curR.style.top = ry + 'px';
+      requestAnimationFrame(anim);
+    })();
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('s', scrollY > 60));
+
+    const observer = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') });
+    }, { threshold: .1 });
+    document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
+      });
+    });
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      const lbl = document.getElementById('ttLabel');
+      if (lbl) lbl.textContent = isDark ? 'Crème' : 'Prestige';
+      localStorage.setItem('ps-theme', isDark ? 'light' : 'dark');
+    }
+    (function () {
+      const saved = localStorage.getItem('ps-theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        const lbl = document.getElementById('ttLabel');
+        if (lbl) lbl.textContent = saved === 'light' ? 'Crème' : 'Prestige';
+      }
+    })();
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-q').addEventListener('click', () => {
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+
+</html>

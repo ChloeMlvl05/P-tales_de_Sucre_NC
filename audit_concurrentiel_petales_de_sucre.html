@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audit Express — Pétales de Sucre</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -300% center
+      }
+
+      100% {
+        background-position: 300% center
+      }
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #F5EFE8;
+      color: #1C1612;
+      padding: 48px 52px 72px;
+    }
+
+    /* ── HEADER ── */
+    .ph {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 40px;
+    }
+
+    .ph-eyebrow {
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #C9A24D;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .ph-eyebrow::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: #C9A24D;
+    }
+
+    .ph-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: #1C1612;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .ph-title span {
+      background: linear-gradient(135deg, #C9A24D, #F0D080, #A8842A, #E8C96A);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s linear infinite;
+    }
+
+    .ph-sub {
+      font-size: 10px;
+      color: #9A8878;
+      margin-top: 6px;
+    }
+
+    .ph-meta {
+      text-align: right;
+      font-size: 9px;
+      color: #B0A090;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1.8;
+    }
+
+    /* ── SECTION HEADER ── */
+    .sh {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .sh-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #C9A24D, #F0D080, #A8842A);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s linear infinite;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .sh-info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1C1612;
+    }
+
+    .sh-info p {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9A8878;
+      margin-top: 2px;
+    }
+
+    .sh-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, #C9A24D, transparent);
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 28px 30px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .07);
+    }
+
+    .card-dark {
+      background: #1C1612;
+    }
+
+    .card-label {
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #C9A24D;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .card-label::before {
+      content: '';
+      width: 14px;
+      height: 1px;
+      background: #C9A24D;
+    }
+
+    /* ── GRILLE SECTIONS ── */
+    .sec {
+      margin-bottom: 52px;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .grid32 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+    }
+
+    /* ── SITES CONCURRENTS ── */
+    .site-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, .08);
+    }
+
+    .site-header {
+      padding: 14px 18px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sh-ps {
+      background: #1C1612;
+    }
+
+    .sh-bac {
+      background: #2D5A27;
+    }
+
+    .sh-fdo {
+      background: #8B5E3C;
+    }
+
+    /* Logo image dans le header de carte */
+    .site-logo-wrap {
+      width: 72px;
+      height: 46px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 0;
+      background: rgba(255, 255, 255, 0.526);
+    }
+
+    .site-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .site-logo-ps {
+      border-radius: 8px;
+    }
+
+    /* hgroup reset */
+    hgroup {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .site-name {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .sn-ps {
+      color: #F2EDE8;
+    }
+
+    .sn-bac {
+      color: #fff;
+    }
+
+    .sn-fdo {
+      color: #fff;
+    }
+
+    .site-url {
+      font-size: 9px;
+      opacity: .5;
+      margin-top: 1px;
+    }
+
+    .su-dark {
+      color: #fff;
+    }
+
+    .su-light {
+      color: #fff;
+    }
+
+    .site-badge {
+      margin-left: auto;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 12px;
+      align-self: flex-start;
+    }
+
+    .sb-notre {
+      background: rgba(201, 162, 77, .2);
+      color: #C9A24D;
+      border: 1px solid rgba(201, 162, 77, .3);
+    }
+
+    .sb-conc {
+      background: rgba(255, 255, 255, .15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, .25);
+    }
+
+    .site-body {
+      padding: 16px 18px 18px;
+    }
+
+    .site-desc {
+      font-size: 11px;
+      line-height: 1.65;
+      color: #5C3D2E;
+      margin-bottom: 12px;
+    }
+
+    /* site-pills est maintenant un <ul> */
+    .site-pills {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .site-pills li {
+      display: contents;
+    }
+
+    .pill {
+      font-size: 9px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 10px;
+      border: 1px solid;
+    }
+
+    .pill-pos {
+      background: rgba(42, 122, 78, .08);
+      color: #2A7A4E;
+      border-color: rgba(42, 122, 78, .2);
+    }
+
+    .pill-neg {
+      background: rgba(230, 112, 88, .08);
+      color: #C95640;
+      border-color: rgba(230, 112, 88, .2);
+    }
+
+    .pill-neu {
+      background: rgba(201, 162, 77, .08);
+      color: #A8842A;
+      border-color: rgba(201, 162, 77, .2);
+    }
+
+    /* ── GRILLE D'ANALYSE ── */
+    .criteria-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .criteria-table thead tr th {
+      padding: 10px 12px;
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 2px solid #F0EAE4;
+      text-align: center;
+    }
+
+    .th-crit {
+      text-align: left !important;
+      background: transparent;
+      color: #9A8878;
+      min-width: 120px;
+    }
+
+    .th-ps {
+      background: #1C1612;
+      color: #C9A24D;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .th-bac {
+      background: #2D5A27;
+      color: #A8D4A0;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .th-fdo {
+      background: #8B5E3C;
+      color: #E8C89A;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .criteria-table tbody tr {
+      border-bottom: 1px solid rgba(0, 0, 0, .05);
+    }
+
+    .criteria-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .criteria-table tbody tr:hover {
+      background: rgba(201, 162, 77, .04);
+    }
+
+    .td-crit {
+      padding: 10px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #5C3D2E;
+      border-right: 1px solid #F0EAE4;
+    }
+
+    .td-sub {
+      font-size: 8.5px;
+      font-weight: 400;
+      color: #B0A090;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .td-val {
+      padding: 10px 12px;
+      font-size: 10px;
+      color: #3A2A1A;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    /* Score dots */
+    .score {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      flex-direction: column;
+    }
+
+    .score-dots {
+      display: flex;
+      gap: 3px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot-on-ps {
+      background: #C9A24D;
+    }
+
+    .dot-on-bac {
+      background: #4A9E5A;
+    }
+
+    .dot-on-fdo {
+      background: #C9844D;
+    }
+
+    .dot-off {
+      background: #E8E0D4;
+    }
+
+    .score-label {
+      font-size: 8px;
+      color: #B0A090;
+      margin-top: 3px;
+    }
+
+    /* Icône check / cross / neutral */
+    .ico {
+      font-size: 14px;
+    }
+
+    /* ── FORCES / FAIBLESSES ── */
+    .sf-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .sf-block {
+      border-radius: 14px;
+      padding: 20px 22px;
+    }
+
+    .sf-pos {
+      background: linear-gradient(135deg, rgba(42, 122, 78, .06), rgba(42, 122, 78, .02));
+      border: 1px solid rgba(42, 122, 78, .18);
+    }
+
+    .sf-neg {
+      background: linear-gradient(135deg, rgba(230, 112, 88, .06), rgba(230, 112, 88, .02));
+      border: 1px solid rgba(230, 112, 88, .18);
+    }
+
+    .sf-title {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .sf-pos .sf-title {
+      color: #2A7A4E;
+    }
+
+    .sf-neg .sf-title {
+      color: #C95640;
+    }
+
+    .sf-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .sf-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .sf-bullet {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .sf-pos .sf-bullet {
+      background: rgba(42, 122, 78, .12);
+    }
+
+    .sf-neg .sf-bullet {
+      background: rgba(230, 112, 88, .12);
+    }
+
+    .sf-txt {
+      font-size: 11px;
+      line-height: 1.6;
+      color: #3A2A1A;
+    }
+
+    .sf-txt strong {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 2px;
+      color: #1C1612;
+    }
+
+    /* ── OPPORTUNITÉS ── */
+    .opp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .opp-item {
+      border-radius: 14px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 48px 1fr 1fr 1fr;
+    }
+
+    .opp-num {
+      background: #1C1612;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #C9A24D, #F0D080);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s linear infinite;
+      padding: 0 0 0 14px;
+    }
+
+    .opp-num-bg {
+      background: #1C1612;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 14px;
+    }
+
+    .opp-col {
+      padding: 14px 16px;
+      border-right: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .opp-col:last-child {
+      border-right: none;
+    }
+
+    .opp-col-constat {
+      background: #251D16;
+    }
+
+    .opp-col-prob {
+      background: #2A1A14;
+    }
+
+    .opp-col-piste {
+      background: rgba(201, 162, 77, .07);
+      border: 1px solid rgba(201, 162, 77, .12);
+      border-radius: 0 14px 14px 0;
+    }
+
+    .opp-col-label {
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .opp-col-constat .opp-col-label {
+      color: rgba(255, 255, 255, .35);
+    }
+
+    .opp-col-prob .opp-col-label {
+      color: #E67058;
+    }
+
+    .opp-col-piste .opp-col-label {
+      color: #C9A24D;
+    }
+
+    .opp-col-txt {
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .opp-col-constat .opp-col-txt {
+      color: #A09080;
+    }
+
+    .opp-col-prob .opp-col-txt {
+      color: #C8B8A8;
+    }
+
+    .opp-col-piste .opp-col-txt {
+      color: #3A2A1A;
+    }
+
+    .opp-col-piste .opp-col-txt strong {
+      color: #1C1612;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .opp-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C9A24D;
+      font-size: 18px;
+      padding: 0 4px;
+      background: #1C1612;
+    }
+
+    /* ── FOOTER ── */
+    .pf {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #B0A090;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 162, 77, .3), transparent);
+      margin: 40px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="ph">
+    <div>
+      <div class="ph-eyebrow">Audit Concurrentiel · Coco DesigNC · 2026</div>
+      <div class="ph-title">Analyse <span>Express</span></div>
+      <div class="ph-sub">Pétales de Sucre vs Bouquet à Croquer vs Fleur d'Oranger NC · 3 sites · 10 critères · 5
+        opportunités</div>
+    </div>
+    <div class="ph-meta">
+      Pétales de Sucre<br>
+      Coco DesigNC · NC · 2026<br>
+      Secteur : Cadeau artisanal premium
+    </div>
+  </header>
+
+
+  <!-- ════════════════════════
+     01. PRÉSENTATION DES SITES
+════════════════════════ -->
+  <section class="sec">
+    <div class="sh">
+      <div class="sh-num">01</div>
+      <div class="sh-info">
+        <h2>Les 3 Sites Analysés</h2>
+        <p>Même secteur · Même cible · Même logique cadeau premium</p>
+      </div>
+      <div class="sh-line"></div>
+    </div>
+
+    <ul class="grid3 sites-list">
+
+      <!-- Pétales de Sucre -->
+      <li class="site-card">
+        <header class="site-header sh-ps">
+          <figure class="site-logo-wrap">
+            <img src="Logo1.png" alt="Logo Pétales de Sucre" class="site-logo site-logo-ps">
+          </figure>
+          <hgroup>
+            <h3 class="site-name sn-ps">Pétales de Sucre</h3>
+            <p class="site-url su-dark">PetaleDeSucre.nc</p>
+          </hgroup>
+          <mark class="site-badge sb-notre">Notre site</mark>
+        </header>
+        <article class="site-body">
+          <p class="site-desc">Site one-page artisanal sur-mesure. Bouquets de crêpes artisanaux à Dumbéa, NC.
+            Configurateur Bouquet interactif visuel en temps réel, paiement en ligne, calendrier Clic &amp; Collect
+            intégré.</p>
+          <ul class="site-pills">
+            <li><span class="pill pill-pos">✓ Configurateur SVG</span></li>
+            <li><span class="pill pill-pos">✓ Paiement en ligne</span></li>
+            <li><span class="pill pill-pos">✓ Ancrage local NC</span></li>
+            <li><span class="pill pill-pos">✓ Double thème</span></li>
+            <li><span class="pill pill-neg">✗ Pas de FAQ visible facilement</span></li>
+            <li><span class="pill pill-neg">✗ Pas de possibilité de changer de langage</span></li>
+            <li><span class="pill pill-neg">✗ 0 avis Google</span></li>
+          </ul>
+        </article>
+      </li>
+
+      <!-- Bouquet à Croquer -->
+      <li class="site-card">
+        <header class="site-header sh-bac">
+          <figure class="site-logo-wrap">
+            <img src="BaC_Logo.avif" alt="Logo Bouquet à Croquer" class="site-logo">
+          </figure>
+          <hgroup>
+            <h3 class="site-name sn-bac">Bouquet à Croquer</h3>
+            <p class="site-url su-dark">bouquetacroquer.fr</p>
+          </hgroup>
+          <mark class="site-badge sb-conc">Concurrent France</mark>
+        </header>
+        <article class="site-body">
+          <p class="site-desc">Concurrent français spécialisé bouquets comestibles (bonbons, chocolats). Catalogue
+            multi-occasions (naissance, anniversaire, Saint-Valentin), livraison nationale. Site Wix.</p>
+          <ul class="site-pills">
+            <li><span class="pill pill-pos">✓ Vraies photos produit</span></li>
+            <li><span class="pill pill-pos">✓ Catalogue riche multi-occasions</span></li>
+            <li><span class="pill pill-pos">✓ Livraison nationale</span></li>
+            <li><span class="pill pill-neg">✗ Wix — design générique</span></li>
+            <li><span class="pill pill-neg">✗ Aucune personnalisation</span></li>
+            <li><span class="pill pill-neg">✗ Hors territoire NC</span></li>
+          </ul>
+        </article>
+      </li>
+
+      <!-- Fleur d'Oranger NC -->
+      <li class="site-card">
+        <header class="site-header sh-fdo">
+          <figure class="site-logo-wrap">
+            <img src="fleurdoranger-logo.gif" alt="Logo Fleur d'Oranger NC" class="site-logo">
+          </figure>
+          <hgroup>
+            <h3 class="site-name sn-fdo">Fleur d'Oranger</h3>
+            <p class="site-url su-dark">fleurdoranger-nc.com</p>
+          </hgroup>
+          <mark class="site-badge sb-conc">Concurrent NC</mark>
+        </header>
+        <article class="site-body">
+          <p class="site-desc">Fleuriste artisanale à Nouméa depuis 20 ans. Compositions florales, roses éternelles,
+            abonnements entreprises. Site WordPress simple. Commande uniquement par formulaire de contact.</p>
+          <ul class="site-pills">
+            <li><span class="pill pill-pos">✓ Présence NC établie 20 ans</span></li>
+            <li><span class="pill pill-pos">✓ Avis clients visibles</span></li>
+            <li><span class="pill pill-pos">✓ Clients B2B (Air Calédonie, SLN…)</span></li>
+            <li><span class="pill pill-neg">✗ 0 boutique en ligne</span></li>
+            <li><span class="pill pill-neg">✗ 0 paiement en ligne</span></li>
+            <li><span class="pill pill-neg">✗ Design daté · WordPress basique</span></li>
+          </ul>
+        </article>
+      </li>
+
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+
+  <!-- ════════════════════════
+     02. GRILLE D'ANALYSE
+════════════════════════ -->
+  <section class="sec">
+    <div class="sh">
+      <div class="sh-num">02</div>
+      <div class="sh-info">
+        <h2>Grille d'Analyse Comparative</h2>
+        <p>10 critères · Évaluation par score et commentaire</p>
+      </div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="card">
+      <table class="criteria-table">
+        <thead>
+          <tr>
+            <th class="th-crit">Critère</th>
+            <th class="th-ps">Pétales de Sucre</th>
+            <th class="th-bac">Bouquet à Croquer</th>
+            <th class="th-fdo">Fleur d'Oranger NC</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td class="td-crit">Design & Identité visuelle<span class="td-sub">Cohérence, modernité, premium</span></td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                </div>
+                <div class="score-label">Exceptionnel</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Charte sur-mesure · 2 thèmes ·
+                Animations CSS · Gradient or shimmer · Curseur personnalisé</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Correct</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Template Wix · Photos
+                produit de qualité mais design générique</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Daté</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">WordPress 2020 · Navigation
+                minimaliste · Design non optimisé mobile</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">UX / Parcours d'achat<span class="td-sub">Fluidité, tunnel de conversion</span></td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Très bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Tunnel complet en 6 étapes ·
+                Scroll ancré fluide · Calendrier + paiement intégrés</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Boutique Wix classique · Panier
+                + paiement en ligne · Pas de personnalisation</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Faible</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Formulaire de devis uniquement
+                · Pas de commande en ligne · Pas de prix affiché</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Photos & Visuels produit<span class="td-sub">Qualité, authenticité, désirabilité</span>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                </div>
+                <div class="score-label">Excellent</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Photos illustratives réel ·
+                Prévisualisation en temps réel · </div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                </div>
+                <div class="score-label">Excellent</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Nombreuses photos pro · Chaque
+                produit détaillé · Visuels haute résolution</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Correct</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Photos de créations réelles ·
+                Galerie visible · Qualité variable selon les créations</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Personnalisation produit<span class="td-sub">Configurateur, options, choix</span></td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                </div>
+                <div class="score-label">Unique</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Configurateur changement photo
+                temps réel ·
+                Format + pâte + fourrage + 7 rubans · Aperçu live</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Inexistant</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Produits fixes · Aucune
+                personnalisation possible · Achat catalogue pur</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Limité</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Personnalisation sur devis ·
+                Possible mais non automatisée · Échange humain requis</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Paiement en ligne<span class="td-sub">Sécurité, fluidité, options</span></td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Très bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Visa · MC · PayPal · Amex · CB
+                · SSL 256 bits · Intégré dans le configurateur</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Paiement Wix natif · CB
+                classique · Fonctionnel mais standard</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Absent</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Aucun paiement en ligne ·
+                Règlement à la livraison ou en boutique uniquement</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Ancrage local & storytelling<span class="td-sub">Histoire, territoire,
+                authenticité</span></td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                </div>
+                <div class="score-label">Excellent</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Histoire fondatrice · Citation
+                · Dumbéa NC · Madeleine de Proust calédonienne</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Faible</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Pas d'histoire de marque ·
+                Produit de France · Aucun ancrage local pour la NC</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Johanna · 20 ans NC · Fleuriste
+                artisanale · Clients locaux reconnus (Air Calédonie, SLN)</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Preuve sociale & avis<span class="td-sub">Témoignages, étoiles, crédibilité</span></td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Moyen</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">3 avis fictifs sur le site ·
+                Pas d'avis Google · Marque de lancement = 0 historique</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Avis Wix intégrés · Photos
+                clients · Nombreuses occasions référencées</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">3 avis clients visibles + logos
+                entreprises clientes (Air Calédonie, SLN, Château Royal)</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Offre B2B<span class="td-sub">Section entreprises, volume, devis</span></td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Très bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Section Entreprises dédiée · 3
+                cas d'usage · Formulaire devis #devis · CTA spécifique</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Absent</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Pas de section B2B identifiée ·
+                Catalogue grand public uniquement</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Abonnements fleurs bureaux ·
+                Logos partenaires affichés · Devis sur formulaire</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">SEO & Visibilité web<span class="td-sub">Référencement, mots-clés, local</span></td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">À construire</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Site de lancement · Pages
+                légales autonomes (atout SEO) · Pas encore de notoriété Google</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Référencé sur "bouquet
+                comestible France" · Pages catégories indexées · Ancienneté domaine</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Moyen</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Référencée localement ·
+                Ancienneté domaine 2020 · Peu de contenu SEO optimisé</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Expérience mobile<span class="td-sub">Responsive, vitesse, lisibilité</span></td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-on-ps"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Très bon</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Responsive CSS natif · 1 seul
+                fichier = chargement rapide · Conçu mobile-first</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-on-bac"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Correct</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Wix responsive auto ·
+                Fonctionnel · Parfois lent (JS lourd Wix)</div>
+            </td>
+            <td class="td-val">
+              <div class="score">
+                <div class="score-dots">
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-on-fdo"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                  <div class="dot dot-off"></div>
+                </div>
+                <div class="score-label">Faible</div>
+              </div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">WordPress non optimisé mobile ·
+                Menu hamburger basique · Images lourdes non compressées</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Navigation<span class="td-sub">Clarté, structure, orientation</span></td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-off"></div></div><div class="score-label">Très clair</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Menu ancré fixe · Sections nommées et numérotées · Scroll fluide · Progression logique</div>
+            </td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-bac"></div><div class="dot dot-on-bac"></div><div class="dot dot-on-bac"></div><div class="dot dot-off"></div><div class="dot dot-off"></div></div><div class="score-label">Correct</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Menu Wix standard · Catégories visibles · Navigation multi-pages classique mais sans surprise</div>
+            </td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-fdo"></div><div class="dot dot-on-fdo"></div><div class="dot dot-off"></div><div class="dot dot-off"></div><div class="dot dot-off"></div></div><div class="score-label">Basique</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Menu WordPress minimal · Peu de pages · Pas de fil directeur vers la commande</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Hiérarchie visuelle<span class="td-sub">Ce qui attire l'œil en premier</span></td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div></div><div class="score-label">Excellente</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Hero plein écran · Titre Playfair + gradient or · CTA doré immédiat · Configurateur en point focal</div>
+            </td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-bac"></div><div class="dot dot-on-bac"></div><div class="dot dot-on-bac"></div><div class="dot dot-off"></div><div class="dot dot-off"></div></div><div class="score-label">Correcte</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Photos produit en avant · Grille catalogue lisible · Mais pas de point d'entrée émotionnel fort</div>
+            </td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-fdo"></div><div class="dot dot-on-fdo"></div><div class="dot dot-off"></div><div class="dot dot-off"></div><div class="dot dot-off"></div></div><div class="score-label">Faible</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Pas de hero structuré · Le regard ne sait pas où aller · Texte et visuels au même niveau</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Lisibilité<span class="td-sub">Textes, contrastes, taille police</span></td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-off"></div></div><div class="score-label">Très bonne</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Typographie soignée · Contrastes forts · Tailles cohérentes · Double thème clair/sombre maîtrisé</div>
+            </td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-bac"></div><div class="dot dot-on-bac"></div><div class="dot dot-on-bac"></div><div class="dot dot-off"></div><div class="dot dot-off"></div></div><div class="score-label">Correcte</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Textes lisibles · Fond blanc classique · Police Wix standard · Pas de problème majeur</div>
+            </td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-fdo"></div><div class="dot dot-on-fdo"></div><div class="dot dot-off"></div><div class="dot dot-off"></div><div class="dot dot-off"></div></div><div class="score-label">Moyenne</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Certains blocs texte trop denses · Contrastes insuffisants sur mobile · Taille de police irrégulière</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="td-crit">Éléments rassurants<span class="td-sub">CTA, témoignages, preuves sociales</span></td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-on-ps"></div><div class="dot dot-off"></div><div class="dot dot-off"></div></div><div class="score-label">Moyen</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">CTA bien visibles · Paiement sécurisé affiché · MAIS témoignages fictifs · 0 avis Google · 0 logo client</div>
+            </td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-bac"></div><div class="dot dot-on-bac"></div><div class="dot dot-on-bac"></div><div class="dot dot-on-bac"></div><div class="dot dot-off"></div></div><div class="score-label">Bon</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Avis clients vérifiés · Photos acheteurs · Mentions livraison et retour · CTA panier omniprésent</div>
+            </td>
+            <td class="td-val">
+              <div class="score"><div class="score-dots"><div class="dot dot-on-fdo"></div><div class="dot dot-on-fdo"></div><div class="dot dot-on-fdo"></div><div class="dot dot-on-fdo"></div><div class="dot dot-off"></div></div><div class="score-label">Bon</div></div>
+              <div style="font-size:9.5px;color:#5C3D2E;margin-top:6px;text-align:left;">Logos clients entreprises · Avis authentiques · 20 ans d'expérience affichés · Mais CTA quasi absents</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CONCLUSION -->
+    <div style="margin-top:24px;background:#1C1612;border-radius:16px;padding:28px 32px;">
+      <div style="font-size:8.5px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#C9A24D;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+        <span style="width:16px;height:1px;background:#C9A24D;display:inline-block;"></span>
+        Conclusion · Analyse critique
+      </div>
+      <p style="font-size:12px;line-height:1.85;color:#D4C4B4;margin-bottom:14px;">
+        Sur les 14 critères analysés, <strong style="color:#F0D080;">Pétales de Sucre domine clairement sur le plan de l'expérience produit</strong> : design sur-mesure, configurateur unique, tunnel d'achat complet et ancrage local fort sont des avantages structurels qu'aucun concurrent ne peut répliquer facilement à court terme. La hiérarchie visuelle et la lisibilité sont maîtrisées, et la navigation guide naturellement le visiteur vers la commande.
+      </p>
+      <p style="font-size:12px;line-height:1.85;color:#D4C4B4;margin-bottom:14px;">
+        Cependant, <strong style="color:#E8A090;">le talon d'Achille reste la crédibilité</strong> : là où Bouquet à Croquer s'appuie sur des avis vérifiés et des photos produit convaincantes, et où Fleur d'Oranger capitalise sur 20 ans de clients fidèles et des logos d'entreprises reconnus, Pétales de Sucre démarre sans historique, sans preuve sociale réelle et sans clientèle établie. Pour un acheteur NC prudent face à un paiement en ligne, ce manque de réassurance est le principal frein à la première conversion.
+      </p>
+      <p style="font-size:12px;line-height:1.85;color:#D4C4B4;">
+        <strong style="color:#F0D080;">La priorité absolue au lancement</strong> n'est donc pas technique — le site est déjà supérieur à ses concurrents sur ce point — mais humaine : générer les premières commandes réelles, collecter les premiers avis Google authentiques, et transformer rapidement les premiers clients en ambassadeurs visibles. C'est cette dynamique initiale qui déverrouillera le plein potentiel d'un site déjà bien construit.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+
+  <!-- ════════════════════════
+     03. POINTS FORTS / FAIBLES
+════════════════════════ -->
+  <section class="sec">
+    <div class="sh">
+      <div class="sh-num">03</div>
+      <div class="sh-info">
+        <h2>3 Points Forts · 3 Points Faibles</h2>
+        <p>Les 3 sites analysés · Analyse comparative</p>
+      </div>
+      <div class="sh-line"></div>
+    </div>
+
+    <!-- ── Pétales de Sucre ── -->
+    <div style="margin-bottom:10px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#C9A24D;flex-shrink:0;"></div>
+        <span style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1C1612;">Pétales de
+          Sucre</span>
+        <span
+          style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C9A24D;background:rgba(201,162,77,.1);border:1px solid rgba(201,162,77,.25);padding:2px 9px;border-radius:10px;">Notre
+          site</span>
+      </div>
+    </div>
+    <div class="sf-grid" style="margin-bottom:32px;">
+      <div class="sf-block sf-pos">
+        <div class="sf-title">3 Points Forts</div>
+        <div class="sf-item">
+          <div class="sf-bullet">✦</div>
+          <div class="sf-txt">
+            <strong>Configurateur Bouquet interactif en temps réel — différenciateur unique sur le marché NC</strong>
+            Aucun concurrent local ni national dans le même secteur ne propose un aperçu du produit en temps réel. Le
+            client voit son bouquet se transformer à chaque choix (format, ruban, fourrage). C'est à la fois un outil de
+            vente puissant et une expérience mémorable qui renforce l'attachement au produit.
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">✦</div>
+          <div class="sf-txt">
+            <strong>Design premium sur-mesure — identité visuelle forte et cohérente</strong>
+            Là où Bouquet à Croquer utilise un template Wix générique et Fleur d'Oranger un WordPress daté, Pétales
+            de Sucre dispose d'une charte graphique entièrement sur-mesure (Playfair + Montserrat, gradient ou animé,
+            double thème, animations CSS). Le site communique immédiatement "luxe artisanal local".
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">✦</div>
+          <div class="sf-txt">
+            <strong>Tunnel d'achat complet intégré — du choix au paiement sans friction</strong>
+            Fleur d'Oranger n'a aucun e-commerce. Bouquet à Croquer a un panier standard sans personnalisation. Pétales
+            de Sucre est le seul des trois à proposer un parcours complet : configurateur → calendrier créneau →
+            paiement sécurisé → modal confirmation → Email + SMS. Tout dans un seul fichier, sans rechargement.
+          </div>
+        </div>
+      </div>
+      <div class="sf-block sf-neg">
+        <div class="sf-title">3 Points Faibles</div>
+        <div class="sf-item">
+          <div class="sf-bullet">⚠</div>
+          <div class="sf-txt">
+            <strong>Zéro client au lancement — marque inconnue sans historique de vente</strong>
+            Fleur d'Oranger capitalise sur 20 ans de clientèle fidèle. Bouquet à Croquer a des centaines de commandes livrées. Pétales de Sucre démarre sans aucun client, sans historique de vente, sans bouche-à-oreille établi. Les premières commandes seront décisives pour créer la dynamique initiale et prouver la viabilité du concept sur le marché NC.
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">⚠</div>
+          <div class="sf-txt">
+            <strong>Zéro preuve sociale réelle — marque de lancement sans historique</strong>
+            Les 3 témoignages affichés sont fictifs. Fleur d'Oranger affiche des logos d'entreprises clientes reconnus
+            (Air Calédonie, SLN, Château Royal). Pour un visiteur prudent, l'absence d'avis Google ou de témoignages
+            clients réels est un frein à la conversion, surtout pour un paiement en ligne.
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">⚠</div>
+          <div class="sf-txt">
+            <strong>SEO inexistant au lancement — visibilité organique nulle</strong>
+            Bouquet à Croquer bénéficie d'une ancienneté de domaine et de pages catégories indexées. Fleur d'Oranger est
+            référencée localement depuis 2020. Pétales de Sucre part de zéro : pas de blog, pas de fiches produit
+            indexables, pas de Google My Business. La visibilité repose entièrement sur les réseaux sociaux.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider" style="margin:24px 0;"></div>
+
+    <!-- ── Bouquet à Croquer ── -->
+    <div style="margin-bottom:10px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#4A9E5A;flex-shrink:0;"></div>
+        <span style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1C1612;">Bouquet à
+          Croquer</span>
+        <span
+          style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2D5A27;background:rgba(45,90,39,.08);border:1px solid rgba(45,90,39,.2);padding:2px 9px;border-radius:10px;">Concurrent
+          France</span>
+      </div>
+    </div>
+    <div class="sf-grid" style="margin-bottom:32px;">
+      <div class="sf-block sf-pos">
+        <div class="sf-title">3 Points Forts</div>
+        <div class="sf-item">
+          <div class="sf-bullet">✦</div>
+          <div class="sf-txt">
+            <strong>Catalogue produit riche et segmenté par occasion</strong>
+            Bouquet à Croquer propose une gamme étendue organisée par événement (naissance, anniversaire,
+            Saint-Valentin, remerciement). Cette navigation par occasion facilite la décision d'achat et capte des
+            requêtes SEO longue traîne très précises, là où Pétales de Sucre n'affiche que 3 formats sans
+            catégorisation.
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">✦</div>
+          <div class="sf-txt">
+            <strong>Photos produit professionnelles — preuve visuelle immédiate de la qualité</strong>
+            Chaque bouquet est présenté avec plusieurs photos haute résolution sur fond neutre. Le visiteur peut évaluer
+            les textures, les couleurs et le rendu réel avant d'acheter. C'est un levier de conversion décisif,
+            notamment pour un achat cadeau en ligne.
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">✦</div>
+          <div class="sf-txt">
+            <strong>SEO national solide — ancienneté de domaine et pages indexées</strong>
+            Le site est référencé sur des requêtes compétitives comme "bouquet comestible livraison France".
+            L'ancienneté du domaine et la structure de pages catégories lui confèrent une visibilité organique durable,
+            sans dépendance aux réseaux sociaux.
+          </div>
+        </div>
+      </div>
+      <div class="sf-block sf-neg">
+        <div class="sf-title">3 Points Faibles</div>
+        <div class="sf-item">
+          <div class="sf-bullet">⚠</div>
+          <div class="sf-txt">
+            <strong>Design générique Wix — absence d'identité visuelle différenciante</strong>
+            Le site repose sur un template Wix standard avec une palette vert foncé et rose pale peu premium. Face à
+            l'univers luxe
+            artisanal de Pétales de Sucre, l'expérience visuelle paraît ordinaire. La perception de valeur est
+            directement impactée, ce qui peut justifier moins bien les prix élevés.
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">⚠</div>
+          <div class="sf-txt">
+            <strong>Aucune personnalisation produit — achat standard sans engagement client</strong>
+            Le parcours d'achat est purement transactionnel : choix d'un produit fixe, ajout au panier, paiement. Il n'y
+            a aucune interaction, aucun configurateur, aucune possibilité d'adapter le bouquet. Cela réduit
+            l'attachement émotionnel au produit et la valeur perçue du cadeau.
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">⚠</div>
+          <div class="sf-txt">
+            <strong>Hors territoire NC — pas d'ancrage local ni de livraison Nouvelle-Calédonie</strong>
+            Bouquet à Croquer n'opère qu'en France métropolitaine. Pour le marché calédonien, il est structurellement
+            hors-jeu : pas de livraison NC, pas de référence locale, pas de crédibilité "fait ici". C'est le principal
+            avantage de Pétales de Sucre sur ce concurrent.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider" style="margin:24px 0;"></div>
+
+    <!-- ── Fleur d'Oranger NC ── -->
+    <div style="margin-bottom:10px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#C9844D;flex-shrink:0;"></div>
+        <span style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#1C1612;">Fleur d'Oranger
+          NC</span>
+        <span
+          style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8B5E3C;background:rgba(139,94,60,.08);border:1px solid rgba(139,94,60,.2);padding:2px 9px;border-radius:10px;">Concurrent
+          NC</span>
+      </div>
+    </div>
+    <div class="sf-grid">
+      <div class="sf-block sf-pos">
+        <div class="sf-title">3 Points Forts</div>
+        <div class="sf-item">
+          <div class="sf-bullet">✦</div>
+          <div class="sf-txt">
+            <strong>Présence locale établie depuis 20 ans — capital confiance unique</strong>
+            Fleur d'Oranger est une référence connue à Nouméa. Cette ancienneté génère une notoriété spontanée, un
+            bouche-à-oreille naturel et une confiance acquise que Pétales de Sucre, en tant que nouvelle marque, devra
+            construire sur plusieurs années.
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">✦</div>
+          <div class="sf-txt">
+            <strong>Clientèle B2B établie — logos entreprises reconnus en NC</strong>
+            Air Calédonie, SLN, Château Royal, Las de Trèfle : ces références professionnelles affichées sur le site
+            sont un signal de crédibilité fort pour les responsables RH et décideurs. Elles signifient que la marque
+            gère des volumes et des occasions sensibles (cadeaux d'entreprise, événements).
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">✦</div>
+          <div class="sf-txt">
+            <strong>Avis clients authentiques visibles — preuve sociale réelle</strong>
+            Contrairement à Pétales de Sucre dont les témoignages sont fictifs au lancement, Fleur d'Oranger affiche des
+            avis clients réels et vérifiables. Sur un marché NC où la recommandation personnelle est centrale dans la
+            décision d'achat, c'est un levier de conversion significatif.
+          </div>
+        </div>
+      </div>
+      <div class="sf-block sf-neg">
+        <div class="sf-title">3 Points Faibles</div>
+        <div class="sf-item">
+          <div class="sf-bullet">⚠</div>
+          <div class="sf-txt">
+            <strong>Aucun e-commerce — commande uniquement par formulaire de contact</strong>
+            En 2026, l'absence totale de boutique en ligne est un frein majeur à la conversion. Le client doit envoyer
+            un message, attendre une réponse, négocier par email — un parcours d'achat à friction maximale. Pétales de
+            Sucre et Bouquet à Croquer permettent tous deux de commander et payer en quelques clics.
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">⚠</div>
+          <div class="sf-txt">
+            <strong>Design WordPress daté — expérience visuelle peu premium</strong>
+            Le site repose sur un thème WordPress non customisé datant de 2020. La mise en page est fonctionnelle mais
+            sans ambition esthétique. Sur un marché du cadeau luxe où l'émotion visuelle joue un rôle clé, un site
+            vieillissant envoie un signal négatif sur la qualité du produit.
+          </div>
+        </div>
+        <div class="sf-item">
+          <div class="sf-bullet">⚠</div>
+          <div class="sf-txt">
+            <strong>Pas de prix affiché — opacité tarifaire qui décourage l'achat spontané</strong>
+            Aucun tarif n'est visible sur le site. Pour une cliente qui cherche un cadeau rapide avec un budget précis,
+            l'obligation de contacter l'entreprise avant de connaître les prix est un frein immédiat. Pétales de Sucre
+            affiche clairement ses 3 formats avec leurs tarifs dès la section boutique.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider"></div>
+
+
+  <!-- ════════════════════════
+     04. OPPORTUNITÉS
+════════════════════════ -->
+  <section class="sec">
+    <div class="sh">
+      <div class="sh-num">04</div>
+      <div class="sh-info">
+        <h2>5 Opportunités d'Amélioration</h2>
+        <p>Constat → Problème → Piste d'amélioration</p>
+      </div>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="opp-list">
+
+      <!-- OPP 1 -->
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);">
+        <div style="display:grid;grid-template-columns:52px 1fr 1fr 1.2fr;">
+          <div class="opp-num-bg">
+            <div class="opp-num">01</div>
+          </div>
+          <div class="opp-col opp-col-constat">
+            <div class="opp-col-label">Constat</div>
+            <div class="opp-col-txt">Une FAQ existe sur le site mais elle est uniquement accessible via le footer.
+              Un visiteur qui parcourt la page principale ne la verra jamais naturellement pendant son parcours d'achat.
+            </div>
+          </div>
+          <div class="opp-col opp-col-prob">
+            <div class="opp-col-label">Problème</div>
+            <div class="opp-col-txt">Le concept de bouquet de crêpes est nouveau en NC. Les visiteurs ont des questions
+              légitimes (conservation, allergènes, délai de préparation, zone de retrait) qui,
+              sans réponse visible, créent une hésitation et freinent la conversion — surtout pour un premier achat en
+              ligne.</div>
+          </div>
+          <div class="opp-col opp-col-piste" style="border-radius:0 14px 14px 0;">
+            <div class="opp-col-label">Piste d'amélioration</div>
+            <div class="opp-col-txt"><strong>Intégrer la FAQ dans le parcours principal de la page</strong>Déplacer ou
+              dupliquer la FAQ entre la section boutique et le formulaire de commande —
+              là où les doutes surgissent naturellement. Un accordéon 5-6 questions suffit.
+              Aucun concurrent ne le fait : c'est une opportunité simple à saisir pour lever les freins à l'achat.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPP 2 -->
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);">
+        <div style="display:grid;grid-template-columns:52px 1fr 1fr 1.2fr;">
+          <div class="opp-num-bg">
+            <div class="opp-num">02</div>
+          </div>
+          <div class="opp-col opp-col-constat">
+            <div class="opp-col-label">Constat</div>
+            <div class="opp-col-txt">Les 3 témoignages affichés sont fictifs. Fleur d'Oranger affiche 3 avis
+              authentiques + les logos de clients entreprises (Air Calédonie, SLN, Château Royal). Le site est
+              entièrement dépourvu d'avis Google.</div>
+          </div>
+          <div class="opp-col opp-col-prob">
+            <div class="opp-col-label">Problème</div>
+            <div class="opp-col-txt">La preuve sociale est le premier levier de confiance pour un achat en ligne. Sur un
+              marché NC où le paiement en ligne reste peu ancré dans les habitudes, l'absence d'avis réels est un frein
+              majeur à la conversion.</div>
+          </div>
+          <div class="opp-col opp-col-piste" style="border-radius:0 14px 14px 0;">
+            <div class="opp-col-label">Piste d'amélioration</div>
+            <div class="opp-col-txt"><strong>Programme "premiers clients ambassadeurs"</strong>Offrir le premier bouquet
+              à 5-10 personnes influentes NC (blogueuses, responsables RH, animatrices d'événements) en échange d'un
+              avis Google et d'un témoignage Instagram. Créer une fiche Google My Business dès le lancement. Intégrer
+              les vrais avis Google sur le site.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPP 3 -->
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);">
+        <div style="display:grid;grid-template-columns:52px 1fr 1fr 1.2fr;">
+          <div class="opp-num-bg">
+            <div class="opp-num">03</div>
+          </div>
+          <div class="opp-col opp-col-constat">
+            <div class="opp-col-label">Constat</div>
+            <div class="opp-col-txt">Le site ne dispose d'aucun contenu SEO (blog, fiches produit, pages localisation).
+              Bouquet à Croquer est référencé sur "bouquet comestible livraison France". Fleur d'Oranger apparaît sur
+              "fleuriste Nouméa" depuis 2020. Pétales de Sucre est invisible sur Google.</div>
+          </div>
+          <div class="opp-col opp-col-prob">
+            <div class="opp-col-label">Problème</div>
+            <div class="opp-col-txt">La visibilité repose à 100% sur les réseaux sociaux (TikTok, Instagram). Si
+              l'algorithme change ou qu'un compte est suspendu, le site perd son trafic. De plus, Marc (B2B) cherche sur
+              Google — il ne sera jamais renvoyé vers le site sans référencement.</div>
+          </div>
+          <div class="opp-col opp-col-piste" style="border-radius:0 14px 14px 0;">
+            <div class="opp-col-label">Piste d'amélioration</div>
+            <div class="opp-col-txt"><strong>Créer une fiche Google My Business + 3 pages SEO ciblées</strong>Fiche GMB
+              "Pétales de Sucre · Dumbéa" pour apparaître sur les recherches locales. Créer 3 pages HTML autonomes :
+              "Cadeau original Nouméa", "Bouquet comestible NC", "Cadeau entreprise Nouvelle-Calédonie". Mots-clés à
+              faible concurrence mais forte intention d'achat locale.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPP 4 -->
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);">
+        <div style="display:grid;grid-template-columns:52px 1fr 1fr 1.2fr;">
+          <div class="opp-num-bg">
+            <div class="opp-num">04</div>
+          </div>
+          <div class="opp-col opp-col-constat">
+            <div class="opp-col-label">Constat</div>
+            <div class="opp-col-txt">Le site ne propose que 3 formats figés (Raffiné, Classique, Prestige). Bouquet à
+              Croquer propose un catalogue segmenté par occasion (naissance, anniversaire, Saint-Valentin,
+              remerciement). Il n'y a pas de bouquet "Fête des Mères" ou "Mariage" clairement identifié.</div>
+          </div>
+          <div class="opp-col opp-col-prob">
+            <div class="opp-col-label">Problème</div>
+            <div class="opp-col-txt">Un visiteur qui arrive avec une intention précise ("cadeau de naissance NC",
+              "bouquet mariage Dumbéa") ne trouve pas de réponse immédiate à son besoin. La navigation par occasion
+              facilite la décision et améliore le référencement sur des requêtes longue traîne.</div>
+          </div>
+          <div class="opp-col opp-col-piste" style="border-radius:0 14px 14px 0;">
+            <div class="opp-col-label">Piste d'amélioration</div>
+            <div class="opp-col-txt"><strong>Ajouter un filtre "par occasion" dans la section Boutique</strong>Taguer
+              chaque format selon les occasions (Anniversaire, Saint-Valentin, Fête des Mères, Naissance, Mariage,
+              Entreprise). Afficher les tags cliquables au-dessus des fiches produit. Simple à ajouter en JavaScript sur
+              l'existant, fort impact sur la conversion et le SEO.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPP 5 -->
+      <div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);">
+        <div style="display:grid;grid-template-columns:52px 1fr 1fr 1.2fr;">
+          <div class="opp-num-bg">
+            <div class="opp-num">05</div>
+          </div>
+          <div class="opp-col opp-col-constat">
+            <div class="opp-col-label">Constat</div>
+            <div class="opp-col-txt">Fleur d'Oranger NC affiche les logos de ses clients entreprises (Air Calédonie,
+              SLN, Château Royal, Las de Trèfle) en bas de page. Pétales de Sucre n'a aucun logo partenaire, aucune
+              référence B2B concrète visible sur le site.</div>
+          </div>
+          <div class="opp-col opp-col-prob">
+            <div class="opp-col-label">Problème</div>
+            <div class="opp-col-txt">Marc (responsable RH) qui visite le site évalue en quelques secondes si la marque
+              est "sérieuse". Sans logo ou référence d'entreprise cliente visible, la section Entreprises perd en
+              crédibilité face à un concurrent établi. Le devis risque de ne pas être demandé.</div>
+          </div>
+          <div class="opp-col opp-col-piste" style="border-radius:0 14px 14px 0;">
+            <div class="opp-col-label">Piste d'amélioration</div>
+            <div class="opp-col-txt"><strong>Constituer et afficher une bande de logos "Ils nous font
+                confiance"</strong>Proposer les 5-10 premières commandes entreprises à prix réduit en échange de
+              l'autorisation d'afficher le logo. Ajouter un bandeau "Ils nous font confiance" dans la section
+              Entreprises dès la 3e commande pro. Impact direct sur la crédibilité B2B et le taux de conversion des
+              devis.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="pf">
+    Pétales de Sucre · Audit Concurrentiel · Coco DesigNC · Nouvelle-Calédonie · 2026
+  </footer>
+
+</body>
+
+</html>

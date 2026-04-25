@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique de retour — Pétales de Sucre</title>
+  <link rel="icon" type="image/png" href="images/Logo.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px
+    }
+
+    img {
+      display: block;
+      max-width: 100%
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-family: inherit
+    }
+
+    :root {
+      --t: #E67058;
+      --c: #E8A88B;
+      --g: #C9A24D;
+      --gl: #F0D080;
+      --gd: #A8842A;
+      --gg: linear-gradient(135deg, #C9A24D 0%, #F0D080 38%, #A8842A 65%, #E8C96A 100%);
+      --tg: linear-gradient(135deg, #E67058, #C95640);
+      --br: 18px;
+      --br2: 12px;
+    }
+
+    :root,
+    html[data-theme="dark"] {
+      --n: #1C1612;
+      --n2: #251D16;
+      --f: #FAF3EE;
+      --f2: #F5E9DF;
+      --nu: #F2DDD0;
+      --tx: #F2EDE8;
+      --tm: #C8B8A8;
+      --tx-m: #A09080;
+      --tx-s: #706050;
+      --bg-body: #1C1612;
+      --bg-card: #2A2018;
+      --bd-card: rgba(242, 237, 232, .12);
+      --bd-sep: rgba(242, 237, 232, .08);
+      --nav-bg-scroll: rgba(28, 22, 18, .95);
+      --nav-link: #A09080;
+      --nav-link-h: #F2EDE8;
+      --footer-bg: #141008;
+      --footer-bd-top: rgba(201, 162, 77, .2);
+      --ft-tag-color: #A09080;
+      --ft-colttl-color: #C8B8A8;
+      --ft-links-color: #C8B8A8;
+      --ft-info-color: #A09080;
+      --ft-extra-color: #706050;
+      --ft-bot-bd: rgba(242, 237, 232, .08);
+      --ft-copy-color: #706050;
+      --ft-made-color: #605040;
+      --soc-bg: rgba(242, 237, 232, .06);
+      --soc-bd: rgba(242, 237, 232, .12);
+      --soc-img-filter: brightness(0) saturate(100%) invert(72%) sepia(10%) saturate(300%) hue-rotate(10deg) brightness(95%);
+      --soc-img-filter-hover: brightness(0) saturate(100%) invert(72%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(110%);
+      --page-hero-bg: linear-gradient(160deg, #181310 0%, #221A14 100%);
+      --card-bg: #2A2018;
+      --card-bd: rgba(242, 237, 232, .1);
+      --acc-bg: rgba(201, 162, 77, .08);
+      --acc-bd: rgba(201, 162, 77, .2);
+      --tag-bg: rgba(242, 237, 232, .07);
+      --tag-color: #C8B8A8;
+    }
+
+    html[data-theme="light"] {
+      --n: #FAF3EE;
+      --n2: #F5E9DF;
+      --tx: #1A1008;
+      --tm: #5C3D2E;
+      --tx-m: rgba(90, 50, 30, .65);
+      --tx-s: rgba(90, 50, 30, .38);
+      --bg-body: #FAF3EE;
+      --bg-card: #FFFFFF;
+      --bd-card: rgba(90, 50, 30, .1);
+      --bd-sep: rgba(90, 50, 30, .08);
+      --nav-bg-scroll: rgba(250, 243, 238, .96);
+      --nav-link: rgba(26, 16, 8, .55);
+      --nav-link-h: #1A1008;
+      --footer-bg: #ECD8C8;
+      --footer-bd-top: rgba(201, 162, 77, .2);
+      --ft-tag-color: rgba(90, 50, 30, .5);
+      --ft-colttl-color: rgba(90, 50, 30, .45);
+      --ft-links-color: rgba(90, 50, 30, .6);
+      --ft-info-color: rgba(90, 50, 30, .5);
+      --ft-extra-color: rgba(90, 50, 30, .4);
+      --ft-bot-bd: rgba(90, 50, 30, .1);
+      --ft-copy-color: rgba(90, 50, 30, .4);
+      --ft-made-color: rgba(90, 50, 30, .35);
+      --soc-bg: rgba(90, 50, 30, .06);
+      --soc-bd: rgba(90, 50, 30, .12);
+      --soc-img-filter: brightness(0) saturate(100%) sepia(30%) saturate(400%) hue-rotate(340deg) brightness(40%);
+      --soc-img-filter-hover: brightness(0) saturate(100%) invert(62%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(100%);
+      --page-hero-bg: linear-gradient(160deg, #F0DDD0 0%, #FAF3EE 100%);
+      --card-bg: #FFFFFF;
+      --card-bd: rgba(90, 50, 30, .1);
+      --acc-bg: rgba(201, 162, 77, .07);
+      --acc-bd: rgba(201, 162, 77, .2);
+      --tag-bg: rgba(230, 112, 88, .07);
+      --tag-color: #5C3D2E;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -300% center
+      }
+
+      100% {
+        background-position: 300% center
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    body {
+      background: var(--bg-body);
+      color: var(--tx);
+      transition: background .45s ease, color .45s ease
+    }
+
+    body * {
+      transition-property: background, border-color, color;
+      transition-duration: .4s;
+      transition-timing-function: ease
+    }
+
+    /* ── Cursor ── */
+    .cur {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--g);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%)
+    }
+
+    .cur-r {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(201, 162, 77, .4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%)
+    }
+
+    /* ── Gold bar ── */
+    .gbar {
+      height: 3px;
+      background: linear-gradient(90deg, #C9A24D, #F0D080, #C9A24D, #A8842A, #F0D080, #C9A24D);
+      background-size: 400%;
+      animation: shimmer 4s linear infinite
+    }
+
+    /* ── Navbar ── */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+      transition: background .4s, backdrop-filter .4s, box-shadow .4s
+    }
+
+    #nav.s {
+      background: var(--nav-bg-scroll);
+      backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: 0 1px 0 rgba(201, 162, 77, .15)
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 800;
+      background: var(--gg);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 6s linear infinite;
+      letter-spacing: .5px
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none
+    }
+
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--nav-link);
+      position: relative;
+      transition: color .3s
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--g);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .nav-links a:hover {
+      color: var(--nav-link-h)
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1)
+    }
+
+    .nav-order {
+      background: transparent;
+      border: 1px solid rgba(201, 162, 77, .5);
+      color: var(--g) !important;
+      padding: 8px 22px;
+      border-radius: 30px;
+      transition: background .3s, border-color .3s !important
+    }
+
+    .nav-order:hover {
+      background: rgba(201, 162, 77, .1) !important;
+      border-color: var(--g) !important
+    }
+
+    .nav-order::after {
+      display: none !important
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: none;
+      border: 1px solid rgba(201, 162, 77, .35);
+      border-radius: 30px;
+      padding: 6px 14px 6px 10px;
+      cursor: pointer;
+      transition: border-color .3s, background .3s;
+      flex-shrink: 0
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--g);
+      background: rgba(201, 162, 77, .08)
+    }
+
+    .tt-track {
+      width: 34px;
+      height: 18px;
+      border-radius: 9px;
+      background: rgba(201, 162, 77, .2);
+      border: 1px solid rgba(201, 162, 77, .3);
+      position: relative;
+      flex-shrink: 0;
+      transition: background .35s, border-color .35s
+    }
+
+    .tt-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--g);
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform .35s cubic-bezier(.16, 1, .3, 1), background .35s
+    }
+
+    html[data-theme="dark"] .tt-thumb {
+      transform: translateX(0)
+    }
+
+    html[data-theme="light"] .tt-thumb {
+      transform: translateX(16px);
+      background: var(--t)
+    }
+
+    html[data-theme="light"] .tt-track {
+      background: rgba(230, 112, 88, .18);
+      border-color: rgba(230, 112, 88, .3)
+    }
+
+    .tt-icon {
+      font-size: 12px;
+      transition: opacity .3s;
+      line-height: 1
+    }
+
+    html[data-theme="dark"] .tt-icon-d {
+      opacity: 1
+    }
+
+    html[data-theme="dark"] .tt-icon-l {
+      opacity: .3
+    }
+
+    html[data-theme="light"] .tt-icon-d {
+      opacity: .3
+    }
+
+    html[data-theme="light"] .tt-icon-l {
+      opacity: 1
+    }
+
+    .tt-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color .35s
+    }
+
+    html[data-theme="dark"] .tt-label {
+      color: var(--g)
+    }
+
+    html[data-theme="light"] .tt-label {
+      color: var(--t)
+    }
+
+    /* ── Page hero banner ── */
+    .page-hero {
+      background: var(--page-hero-bg);
+      padding: 120px 52px 72px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(201, 162, 77, .1) 0%, transparent 65%);
+      pointer-events: none
+    }
+
+    .page-hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      animation: fadeUp .8s cubic-bezier(.16, 1, .3, 1) both
+    }
+
+    .breadcrumb {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--tx-m);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .breadcrumb a {
+      color: var(--g);
+      transition: color .3s
+    }
+
+    .breadcrumb a:hover {
+      color: var(--gl)
+    }
+
+    .breadcrumb-sep {
+      opacity: .4
+    }
+
+    .page-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--t);
+      margin-bottom: 14px
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--tx);
+      line-height: 1.1;
+      margin-bottom: 16px
+    }
+
+    .page-title .gt {
+      background: var(--gg);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s linear infinite
+    }
+
+    .page-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      color: var(--tm);
+      line-height: 1.75;
+      max-width: 560px
+    }
+
+    .page-meta {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      color: var(--tx-s);
+      margin-top: 12px;
+      letter-spacing: .5px
+    }
+
+    /* ── Content layout ── */
+    .page-content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 52px 80px
+    }
+
+    .section-block {
+      margin-bottom: 52px
+    }
+
+    .section-block:last-child {
+      margin-bottom: 0
+    }
+
+    /* ── Titres sections ── */
+    .s-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--tx);
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--bd-sep);
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .s-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gg);
+      background-size: 200%;
+      animation: shimmer 5s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #1A1008;
+      flex-shrink: 0
+    }
+
+    /* ── Texte corps ── */
+    p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: var(--tm);
+      line-height: 1.9;
+      margin-bottom: 14px
+    }
+
+    p:last-child {
+      margin-bottom: 0
+    }
+
+    strong {
+      font-weight: 700;
+      color: var(--tx)
+    }
+
+    a.inline-link {
+      color: var(--g);
+      text-decoration: underline;
+      text-decoration-color: rgba(201, 162, 77, .35);
+      transition: color .3s, text-decoration-color .3s
+    }
+
+    a.inline-link:hover {
+      color: var(--gl);
+      text-decoration-color: var(--gl)
+    }
+
+    /* ── Cards info ── */
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-bd);
+      border-radius: var(--br2);
+      padding: 24px 28px;
+      margin-bottom: 16px
+    }
+
+    .info-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--tx);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .ic-icon {
+      font-size: 18px
+    }
+
+    .info-card p {
+      font-size: 13px
+    }
+
+    .info-card ul {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: var(--tm);
+      line-height: 1.85;
+      padding-left: 18px;
+      margin-top: 8px
+    }
+
+    .info-card ul li {
+      margin-bottom: 6px
+    }
+
+    .info-card ul li::marker {
+      color: var(--g)
+    }
+
+    /* ── Card accent or ── */
+    .accent-card {
+      background: var(--acc-bg);
+      border: 1px solid var(--acc-bd);
+      border-radius: var(--br2);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      border-left: 3px solid var(--g)
+    }
+
+    .accent-card p {
+      color: var(--tm);
+      font-size: 13px
+    }
+
+    .accent-card strong {
+      color: var(--tx)
+    }
+
+    /* ── Grilles ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0
+    }
+
+    /* ── Tableau ── */
+    .legal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px
+    }
+
+    .legal-table th {
+      background: rgba(201, 162, 77, .1);
+      color: var(--tx);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--acc-bd)
+    }
+
+    .legal-table td {
+      padding: 12px 16px;
+      color: var(--tm);
+      border-bottom: 1px solid var(--bd-sep)
+    }
+
+    .legal-table tr:last-child td {
+      border-bottom: none
+    }
+
+    .legal-table tr:hover td {
+      background: rgba(201, 162, 77, .04)
+    }
+
+    /* ── Notice ── */
+    .notice {
+      background: rgba(230, 112, 88, .08);
+      border: 1px solid rgba(230, 112, 88, .2);
+      border-radius: var(--br2);
+      padding: 18px 22px;
+      margin: 20px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start
+    }
+
+    .notice-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px
+    }
+
+    .notice p {
+      color: var(--tm);
+      font-size: 13px;
+      margin: 0
+    }
+
+    .notice-success {
+      background: rgba(58, 138, 94, .08);
+      border-color: rgba(58, 138, 94, .2)
+    }
+
+    .notice-gold {
+      background: rgba(201, 162, 77, .08);
+      border-color: rgba(201, 162, 77, .25)
+    }
+
+    /* ── Scroll reveal ── */
+    .rv {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .rv.d1 {
+      transition-delay: .08s
+    }
+
+    .rv.d2 {
+      transition-delay: .16s
+    }
+
+    .rv.d3 {
+      transition-delay: .24s
+    }
+
+    .rv.d4 {
+      transition-delay: .32s
+    }
+
+    .rv.d5 {
+      transition-delay: .4s
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--footer-bg);
+      padding: 52px 52px 28px;
+      border-top: 1px solid var(--footer-bd-top)
+    }
+
+    .ft-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 48px
+    }
+
+    .ft-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      background: var(--gg);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 6s linear infinite;
+      margin-bottom: 12px
+    }
+
+    .ft-tag {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ft-tag-color);
+      margin-bottom: 20px
+    }
+
+    .ft-socials {
+      display: flex;
+      gap: 10px
+    }
+
+    .soc {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--soc-bg);
+      border: 1px solid var(--soc-bd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px;
+      overflow: hidden;
+      transition: background .3s, border-color .3s, box-shadow .3s
+    }
+
+    .soc img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: var(--soc-img-filter);
+      transition: filter .3s
+    }
+
+    .soc:hover {
+      background: rgba(201, 162, 77, .12);
+      border-color: rgba(201, 162, 77, .45);
+      box-shadow: 0 4px 16px rgba(201, 162, 77, .18)
+    }
+
+    .soc:hover img {
+      filter: var(--soc-img-filter-hover)
+    }
+
+    .ft-col-ttl {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--ft-colttl-color);
+      margin-bottom: 16px
+    }
+
+    .ft-links {
+      display: flex;
+      flex-direction: column;
+      gap: 9px
+    }
+
+    .ft-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: var(--ft-links-color);
+      transition: color .3s
+    }
+
+    .ft-links a:hover {
+      color: var(--g)
+    }
+
+    .ft-links a.active {
+      color: var(--g)
+    }
+
+    .ft-info p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      color: var(--ft-info-color);
+      margin-bottom: 7px;
+      line-height: 1.5
+    }
+
+    .ft-bot {
+      border-top: 1px solid var(--ft-bot-bd);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .ft-copy {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      color: var(--ft-copy-color);
+      letter-spacing: .5px
+    }
+
+    .ft-made {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      color: var(--ft-made-color)
+    }
+
+    .ft-made span {
+      color: rgba(201, 162, 77, .5)
+    }
+
+    @media(max-width:768px) {
+      #nav {
+        padding: 0 20px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .page-hero {
+        padding: 100px 20px 48px
+      }
+
+      .page-title {
+        font-size: 32px
+      }
+
+      .page-content {
+        padding: 40px 20px 60px
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr
+      }
+
+      .ft-top {
+        grid-template-columns: 1fr;
+        gap: 32px
+      }
+
+      footer {
+        padding: 40px 20px 24px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cur" id="cur"></div>
+  <div class="cur-r" id="curR"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">Pétales de Sucre</a>
+    <ul class="nav-links">
+      <li><a href="index.html#boutique">Boutique</a></li>
+      <li><a href="index.html#config">Configurateur</a></li>
+      <li><a href="index.html#histoire">Notre Histoire</a></li>
+      <li><a href="index.html#entreprises">Entreprises</a></li>
+      <li><a href="index.html#commande" class="nav-order">Commander</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Changer de thème">
+      <span class="tt-icon tt-icon-d">🌙</span>
+      <div class="tt-track">
+        <div class="tt-thumb"></div>
+      </div>
+      <span class="tt-icon tt-icon-l">☀️</span>
+      <span class="tt-label" id="ttLabel">Prestige</span>
+    </button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Politique de retour</span>
+      </div>
+      <div class="page-eyebrow">Transparence &amp; confiance</div>
+      <h1 class="page-title">Politique de <span class="gt">retour</span></h1>
+      <p class="page-subtitle">Chez Pétales de Sucre, chaque bouquet est préparé avec soin. Voici comment nous
+        fonctionnons si quelque chose ne correspond pas à vos attentes.</p>
+      <p class="page-meta">Dernière mise à jour : Janvier 2026</p>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- ── Intro ── -->
+    <div class="section-block rv">
+      <div class="notice notice-gold">
+        <span class="notice-icon">🌸</span>
+        <p>Nos bouquets sont des créations artisanales, préparées à la commande le jour même de votre retrait, avec des
+          ingrédients frais et un soin particulier. Nous mettons tout en œuvre pour que votre expérience soit à la
+          hauteur de l'occasion — et si quelque chose devait ne pas aller, nous sommes là pour vous accompagner.</p>
+      </div>
+    </div>
+
+    <!-- ── 1. Vérification au retrait ── -->
+    <div class="section-block rv d1">
+      <div class="s-title"><span class="s-num">1</span>Vérification au moment du retrait</div>
+      <p>Lors de la remise de votre bouquet à notre atelier, nous vous invitons à l'examiner ensemble avant de repartir.
+        C'est le moment idéal pour vérifier :</p>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="info-card">
+          <div class="info-card-title"><span class="ic-icon">✅</span>Ce que nous vérifions avec vous</div>
+          <ul>
+            <li>Le format commandé (nombre de crêpes)</li>
+            <li>La couleur du ruban choisie</li>
+            <li>L'état général de la présentation</li>
+            <li>La conformité avec votre commande</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title"><span class="ic-icon">💬</span>Notre engagement</div>
+          <p>Si vous constatez une différence avec votre commande au moment du retrait, signalez-le immédiatement. Nous
+            ferons tout notre possible pour corriger la situation sur place ou trouver une solution adaptée, sans délai
+            et sans friction.</p>
+        </div>
+      </div>
+      <div class="accent-card">
+        <p><strong>Important :</strong> une fois le bouquet accepté et la boutique quittée, la commande est considérée
+          comme conforme et livrée dans les meilleures conditions. Nous vous invitons donc à prendre le temps de
+          vérifier votre bouquet avant de partir.</p>
+      </div>
+    </div>
+
+    <!-- ── 2. Absence de retour standard ── -->
+    <div class="section-block rv d2">
+      <div class="s-title"><span class="s-num">2</span>Absence de retour après acceptation</div>
+      <p>Les bouquets de crêpes étant des denrées alimentaires fraîches, fabriquées à la commande et entièrement
+        personnalisées, il n'est pas possible d'accepter de retour ou d'émettre un remboursement une fois le bouquet
+        remis et accepté.</p>
+      <p>Cela s'applique dans les situations suivantes :</p>
+      <div class="info-card">
+        <div class="info-card-title"><span class="ic-icon">📋</span>Situations non remboursables</div>
+        <ul>
+          <li>Changement d'avis après le retrait</li>
+          <li>Bouquet consommé partiellement ou en totalité</li>
+          <li>Mauvaise conservation après le retrait (température, délai)</li>
+          <li>Accident survenu après la remise (choc, renversement…)</li>
+          <li>Préférence gustative — nos fourrages sont décrits en détail lors de la commande</li>
+        </ul>
+      </div>
+      <p>Cette politique nous permet de <strong>garantir la fraîcheur maximale</strong> de chaque création préparée pour
+        vous, et d'assurer une équité envers tous nos clients.</p>
+    </div>
+
+    <!-- ── 3. Réclamation avérée ── -->
+    <div class="section-block rv d2">
+      <div class="s-title"><span class="s-num">3</span>En cas de problème avéré</div>
+      <p>Si vous constatez un défaut sérieux après le retrait — un problème sanitaire, la présence d'un corps étranger
+        ou toute anomalie manifeste non détectable à l'œil nu au moment du retrait — nous prenons cela très au sérieux
+        et nous engageons à trouver une solution juste.</p>
+
+      <div class="info-card" style="border-left:3px solid var(--g)">
+        <div class="info-card-title"><span class="ic-icon">📸</span>La procédure à suivre</div>
+        <ul>
+          <li><strong>Étape 1 :</strong> photographiez le bouquet dès la constatation du problème, sans y toucher
+            davantage</li>
+          <li><strong>Étape 2 :</strong> contactez-nous dans les <strong>2 heures</strong> suivant le retrait — passé ce
+            délai, il nous sera difficile d'établir un lien avec notre préparation</li>
+          <li><strong>Étape 3 :</strong> envoyez vos photos accompagnées d'une description précise à <a
+              href="mailto:PetaleDeSucre@gmail.com" class="inline-link">PetaleDeSucre@gmail.com</a></li>
+          <li><strong>Étape 4 :</strong> nous vous répondons sous 24h avec la solution retenue</li>
+        </ul>
+      </div>
+
+      <div class="grid-2">
+        <div class="info-card">
+          <div class="info-card-title"><span class="ic-icon">🔄</span>Solutions possibles</div>
+          <p>Selon la nature du problème constaté et les preuves apportées, nous pouvons proposer un
+            <strong>remboursement partiel ou total</strong>, ou la <strong>confection d'un nouveau bouquet</strong> à
+            une date convenue ensemble.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title"><span class="ic-icon">⚖️</span>Notre engagement qualité</div>
+          <p>Chaque réclamation est examinée avec attention et bienveillance. Notre réputation repose sur la qualité de
+            nos créations — un problème avéré sera toujours traité sérieusement et rapidement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 4. Annulation avant préparation ── -->
+    <div class="section-block rv d3">
+      <div class="s-title"><span class="s-num">4</span>Annulation &amp; modification avant préparation</div>
+      <p>Vous avez changé d'avis ou souhaitez modifier votre commande ? Pas de panique — tant que nous n'avons pas
+        commencé la préparation, tout reste possible.</p>
+      <table class="legal-table">
+        <thead>
+          <tr>
+            <th>Délai avant le créneau de retrait</th>
+            <th>Annulation</th>
+            <th>Modification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Plus de 48h</strong></td>
+            <td>✅ Gratuite · Remboursement intégral</td>
+            <td>✅ Sans frais</td>
+          </tr>
+          <tr>
+            <td><strong>Entre 24h et 48h</strong></td>
+            <td>⚠️ Retenue de 30% (ingrédients préparés)</td>
+            <td>✅ Possible selon disponibilité</td>
+          </tr>
+          <tr>
+            <td><strong>Moins de 24h</strong></td>
+            <td>❌ Non remboursable · Préparation en cours</td>
+            <td>❌ Non modifiable</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="accent-card">
+        <p><strong>Pour annuler ou modifier :</strong> envoyez-nous un email à <a href="mailto:PetalesDeSucre@gmail.com"
+            class="inline-link">PetalesDeSucre@gmail.com</a> en précisant votre numéro de commande et le motif. Nous
+          accusons réception dans les meilleurs délais.</p>
+      </div>
+    </div>
+
+    <!-- ── 5. Allergies ── -->
+    <div class="section-block rv d3">
+      <div class="s-title"><span class="s-num">5</span>Allergies &amp; régimes alimentaires</div>
+      <p>Nos crêpes contiennent du <strong>gluten, des œufs et du lait</strong>. Certains fourrages (pâte de noisette
+        maison) peuvent contenir des <strong>traces de fruits à coque</strong>.</p>
+      <p>Si vous avez une allergie ou une intolérance, merci de nous le signaler impérativement lors de votre commande
+        dans le champ "Message". Nous ferons notre possible pour vous orienter ou adapter la composition, selon les
+        contraintes de notre atelier.</p>
+      <div class="notice">
+        <span class="notice-icon">⚠️</span>
+        <p>Pétales de Sucre décline toute responsabilité en cas de réaction allergique si les informations relatives aux
+          allergies n'ont pas été communiquées au moment de la commande.</p>
+      </div>
+    </div>
+
+    <!-- ── 6. Contact ── -->
+    <div class="section-block rv d4">
+      <div class="s-title"><span class="s-num">6</span>Nous contacter</div>
+      <div class="notice notice-success">
+        <span class="notice-icon">💬</span>
+        <p>Une question sur votre commande, un doute, une situation particulière ? Écrivez-nous — nous répondons
+          toujours avec le sourire et dans les <strong>24h</strong>. Votre satisfaction est notre fierté, et chaque
+          échange compte pour nous.<br><br>
+          📧 <a href="mailto:PetalesDeSucre@gmail.com" class="inline-link">PetalesDeSucre@gmail.com</a><br>
+          🌐 <a href="index.html#commande" class="inline-link">Formulaire de contact sur le site</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="gbar"></div>
+  <footer>
+    <div class="ft-top">
+      <div>
+        <div class="ft-brand">Pétales de Sucre</div>
+        <div class="ft-tag">L'élégance à croquer.</div>
+        <div class="ft-socials">
+          <a href="#" class="soc" aria-label="Instagram"><img src="images/icone_insta.png" alt="Instagram"></a>
+          <a href="#" class="soc" aria-label="Facebook"><img src="images/icone_fb.png" alt="Facebook"></a>
+          <a href="#" class="soc" aria-label="TikTok"><img src="images/icone_tiktok.png" alt="TikTok"></a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-ttl">Navigation</div>
+        <div class="ft-links">
+          <a href="index.html#boutique">Notre Boutique</a>
+          <a href="index.html#config">Configurateur</a>
+          <a href="index.html#histoire">Notre Histoire</a>
+          <a href="index.html#entreprises">Entreprises</a>
+          <a href="index.html#commande">Commander</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-ttl">Informations</div>
+        <div class="ft-links">
+          <a href="click-and-collect.html">Clic &amp; Collect</a>
+          <a href="faq.html">FAQ</a>
+          <a href="politique-retour.html">Politique de retour</a>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="conditions-vente.html">Conditions de vente</a>
+          <a href="rgpd.html">Politique RGPD</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-ttl">Contact</div>
+        <div class="ft-info">
+          <p>Dumbéa, Nouvelle-Calédonie</p>
+          <p>PetalesDeSucre@gmail.com</p>
+          <p>www.PetalesDeSucre.nc</p>
+          <p style="margin-top:12px;font-size:11px;color:var(--ft-extra-color)">Clic &amp; Collect — Atelier
+            Dumbéa<br>Lun–Sam · 8h–18h<br>Sur créneau réservé en ligne</p>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">© 2026 Pétales de Sucre · Tous droits réservés</div>
+      <div class="ft-made">Réalisé par <span>Coco DesigNC</span> · Nouvelle-Calédonie</div>
+    </div>
+  </footer>
+
+  <script>
+    const cur = document.getElementById('cur'), curR = document.getElementById('curR');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+    (function anim() {
+      cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+      rx += (mx - rx) * .13; ry += (my - ry) * .13;
+      curR.style.left = rx + 'px'; curR.style.top = ry + 'px';
+      requestAnimationFrame(anim);
+    })();
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('s', scrollY > 60));
+
+    const observer = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') });
+    }, { threshold: .1 });
+    document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
+      });
+    });
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      const lbl = document.getElementById('ttLabel');
+      if (lbl) lbl.textContent = isDark ? 'Crème' : 'Prestige';
+      localStorage.setItem('ps-theme', isDark ? 'light' : 'dark');
+    }
+    (function () {
+      const saved = localStorage.getItem('ps-theme');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        const lbl = document.getElementById('ttLabel');
+        if (lbl) lbl.textContent = saved === 'light' ? 'Crème' : 'Prestige';
+      }
+    })();
+  </script>
+</body>
+
+</html>
