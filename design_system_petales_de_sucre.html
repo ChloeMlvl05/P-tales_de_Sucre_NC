@@ -1,0 +1,2199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System — Pétales de Sucre · Coco DesigNC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { font-family: 'Montserrat', sans-serif; background: #F7F4F0; color: #1C1612; }
+
+@keyframes shimmer {
+  0%   { background-position: -300% center }
+  100% { background-position:  300% center }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0) }
+  50%       { transform: translateY(-8px) }
+}
+
+/* ═══ VARIABLES EXACTES DU SITE ═══ */
+:root {
+  --t:  #E67058;
+  --g:  #C9A24D;
+  --gl: #F0D080;
+  --gd: #A8842A;
+  --gg: linear-gradient(135deg, #C9A24D 0%, #F0D080 38%, #A8842A 65%, #E8C96A 100%);
+  --n:  #1C1612;
+  --n2: #251D16;
+  --f:  #FAF3EE;
+  --f2: #F5E9DF;
+  --tx: #F2EDE8;
+  --tm: #C8B8A8;
+  --br: 18px;
+  --br2: 12px;
+}
+
+/* ═══════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════ */
+.ds-header {
+  background: var(--n);
+  padding: 52px 64px 48px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid transparent;
+  border-image: var(--gg) 1;
+}
+.ds-header::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,162,77,.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.ds-header::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -40px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230,112,88,.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.ds-header-inner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.ds-header-left {}
+.ds-header-eyebrow {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ds-header-eyebrow::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--g);
+}
+.ds-header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -1.5px;
+}
+.ds-header-title span {
+  background: var(--gg);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+.ds-header-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,.35);
+  margin-top: 10px;
+  line-height: 1.7;
+}
+.ds-header-right {
+  text-align: right;
+}
+.ds-header-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 80px;
+  font-weight: 800;
+  background: var(--gg);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+  line-height: 1;
+  letter-spacing: -4px;
+}
+.ds-header-version {
+  font-size: 9px;
+  color: rgba(255,255,255,.2);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.ds-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 64px 64px 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* ═══ SECTION HEADER ═══ */
+.ds-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.ds-sec-hd {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.ds-sec-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  font-weight: 800;
+  background: var(--gg);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.ds-sec-info h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--n);
+}
+.ds-sec-info p {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #9A8878;
+  margin-top: 2px;
+}
+.ds-sec-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--g), transparent);
+}
+
+/* ═══ COMPONENT CARD ═══ */
+.ds-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 36px;
+  box-shadow: 0 6px 28px rgba(0,0,0,.06);
+}
+.ds-card-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--g);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ds-card-label::before {
+  content: '';
+  width: 20px; height: 1px;
+  background: var(--g);
+}
+.ds-card-note {
+  font-size: 10px;
+  color: #B0A090;
+  margin-top: 16px;
+  line-height: 1.7;
+  padding-top: 14px;
+  border-top: 1px solid #F0EAE4;
+  font-style: italic;
+}
+
+/* Grille de composants à l'intérieur d'une ds-card */
+.comp-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.comp-grid {
+  display: grid;
+  gap: 16px;
+}
+.comp-grid-2 { grid-template-columns: 1fr 1fr; }
+.comp-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.comp-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Dark preview pane */
+.dark-pane {
+  background: var(--n);
+  border-radius: 14px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ═══ DIVIDER ═══ */
+.ds-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,162,77,.3), transparent);
+}
+
+/* ══════════════════════════════════════════
+   PALETTE
+══════════════════════════════════════════ */
+.palette-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.swatch-color {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  transition: transform .2s;
+}
+.swatch-color:hover { transform: scale(1.07); }
+.swatch-name {
+  font-size: 10px;
+  font-weight: 700;
+  color: #3A2A1A;
+  text-align: center;
+  letter-spacing: .5px;
+}
+.swatch-hex {
+  font-size: 9px;
+  color: #9A8878;
+  font-family: 'Courier New', monospace;
+}
+
+/* Gradient special */
+.swatch-gradient {
+  background: linear-gradient(135deg, #C9A24D 0%, #F0D080 38%, #A8842A 65%, #E8C96A 100%);
+  background-size: 200%;
+  animation: shimmer 4s linear infinite;
+  width: 200px;
+}
+
+/* ══════════════════════════════════════════
+   TYPOGRAPHIE
+══════════════════════════════════════════ */
+.typo-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.typo-item {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #F0EAE4;
+}
+.typo-item:last-child { border-bottom: none; padding-bottom: 0; }
+.typo-meta {
+  min-width: 180px;
+  flex-shrink: 0;
+}
+.typo-role {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--g);
+}
+.typo-spec {
+  font-size: 10px;
+  color: #B0A090;
+  margin-top: 3px;
+  line-height: 1.6;
+}
+
+/* Styles typographiques réels */
+.t-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  font-weight: 800;
+  background: var(--gg);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+  line-height: .95;
+  letter-spacing: -2px;
+}
+.t-h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--n);
+  line-height: 1.1;
+  letter-spacing: -.5px;
+}
+.t-h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--n);
+  letter-spacing: -.3px;
+}
+.t-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--g);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.t-eyebrow::before {
+  content: '';
+  width: 22px; height: 1px;
+  background: var(--g);
+}
+.t-body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #5C3D2E;
+  line-height: 1.8;
+  font-weight: 400;
+}
+.t-caption {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  color: #9A8878;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.t-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--t);
+  line-height: 1.5;
+}
+.t-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  background: var(--gg);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+/* ══════════════════════════════════════════
+   BOUTONS — copie exacte du site
+══════════════════════════════════════════ */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gg);
+  background-size: 200%;
+  animation: shimmer 4s linear infinite;
+  color: var(--n);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 17px 36px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 36px rgba(201,162,77,.3);
+  transition: transform .3s, box-shadow .3s;
+  text-decoration: none;
+}
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 14px 48px rgba(201,162,77,.5); }
+
+.btn-ghost-wh {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #9A8878;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color .3s;
+  text-decoration: none;
+}
+.btn-ghost-wh:hover { color: var(--n); }
+
+.btn-ghost-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color .3s;
+  text-decoration: none;
+}
+.btn-ghost-dark:hover { color: #fff; }
+
+.btn-cmd {
+  background: var(--t);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background .3s, transform .2s, box-shadow .3s;
+}
+.btn-cmd:hover { background: #C95640; transform: scale(1.04); box-shadow: 0 8px 28px rgba(230,112,88,.4); }
+
+.nav-order {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--g);
+  border: 1px solid rgba(201,162,77,.4);
+  border-radius: 50px;
+  padding: 10px 22px;
+  background: none;
+  cursor: pointer;
+  transition: border-color .3s, background .3s;
+  text-decoration: none;
+}
+.nav-order:hover { border-color: var(--g); background: rgba(201,162,77,.08); }
+
+.arr {
+  width: 32px; height: 1px;
+  background: currentColor;
+  position: relative;
+}
+.arr::after {
+  content: '';
+  position: absolute;
+  right: -1px; top: -3.5px;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 7px solid currentColor;
+}
+
+/* ══════════════════════════════════════════
+   BADGES & TAGS — copie exacte
+══════════════════════════════════════════ */
+.pcard-badge-demo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  display: inline-block;
+}
+.pcard-hit-demo {
+  background: var(--t);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #fff;
+  display: inline-block;
+}
+.tag-demo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9.5px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(230,112,88,.07);
+  color: #5C3D2E;
+  border: 1px solid rgba(230,112,88,.15);
+  display: inline-block;
+}
+.concept-img-tag-demo {
+  background: var(--n);
+  border: 1px solid rgba(201,162,77,.3);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--g);
+  display: inline-block;
+}
+.badge-ssl {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--g);
+  background: rgba(201,162,77,.08);
+  border: 1px solid rgba(201,162,77,.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+/* ══════════════════════════════════════════
+   INPUTS & FORMULAIRE
+══════════════════════════════════════════ */
+.fi-demo {
+  width: 100%;
+  background: #2A2018;
+  border: 1px solid rgba(242,237,232,.18);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #F2EDE8;
+  outline: none;
+  transition: border-color .3s, background .3s;
+}
+.fi-demo::placeholder { color: #706050; }
+.fi-demo:focus { border-color: rgba(201,162,77,.55); background: #2E2419; }
+
+.fl-demo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #A09080;
+  display: block;
+  margin-bottom: 7px;
+}
+
+.pay-input-demo {
+  width: 100%;
+  background: #2A2018;
+  border: 1px solid rgba(242,237,232,.18);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #F2EDE8;
+  outline: none;
+  transition: border-color .3s, box-shadow .3s;
+}
+.pay-input-demo:focus {
+  border-color: var(--g);
+  box-shadow: 0 0 0 3px rgba(201,162,77,.12);
+}
+.pay-input-demo::placeholder { color: #706050; }
+
+/* checkbox */
+.check-demo-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+.check-box-demo {
+  width: 20px; height: 20px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(242,237,232,.3);
+  background: #2A2018;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s, background .2s;
+}
+.check-box-demo.checked {
+  background: var(--gg);
+  background-size: 200%;
+  animation: shimmer 4s linear infinite;
+  border-color: transparent;
+}
+.check-box-demo.checked::after {
+  content: '✓';
+  font-size: 11px;
+  font-weight: 700;
+  color: #1A1008;
+}
+.check-txt-demo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: #C8B8A8;
+  line-height: 1.7;
+}
+
+/* ══════════════════════════════════════════
+   CARTES PRODUIT
+══════════════════════════════════════════ */
+.pcard-ds {
+  border-radius: var(--br);
+  overflow: hidden;
+  background: #2A2018;
+  border: 1px solid rgba(242,237,232,.12);
+  transition: transform .4s cubic-bezier(.16,1,.3,1), border-color .4s, box-shadow .4s;
+  cursor: pointer;
+}
+.pcard-ds:hover {
+  transform: translateY(-10px);
+  border-color: rgba(201,162,77,.25);
+  box-shadow: 0 28px 64px rgba(0,0,0,.45);
+}
+.pcard-ds-img {
+  aspect-ratio: .9;
+  background: linear-gradient(145deg, #2C1F14, #1A1208);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.pcard-ds-body { padding: 20px 20px 22px; }
+.pcard-ds-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #F2EDE8;
+  letter-spacing: -.3px;
+  margin-bottom: 3px;
+}
+.pcard-ds-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--g);
+  margin-bottom: 12px;
+}
+.pcard-ds-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  line-height: 1.75;
+  color: #A09080;
+  margin-bottom: 16px;
+}
+.pcard-ds-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+.pcard-ds-ft {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(242,237,232,.1);
+}
+.pcard-ds-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  background: var(--gg);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+/* ══════════════════════════════════════════
+   CARTES TÉMOIGNAGES
+══════════════════════════════════════════ */
+.tcard-ds {
+  background: #2A2018;
+  border: 1px solid rgba(242,237,232,.1);
+  border-radius: var(--br);
+  padding: 28px;
+}
+.tc-stars-ds { font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+.tc-txt-ds {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #C8B8A8;
+  line-height: 1.8;
+  margin-bottom: 18px;
+  font-style: italic;
+}
+.tc-auth-ds {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(242,237,232,.08);
+}
+.tc-av-ds {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(242,237,232,.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.tc-name-ds {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #F2EDE8;
+}
+.tc-loc-ds {
+  font-size: 10px;
+  color: #706050;
+  margin-top: 1px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ══════════════════════════════════════════
+   PILIER
+══════════════════════════════════════════ */
+.pillar-ds {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: var(--br2);
+  border: 1px solid rgba(242,237,232,.1);
+  background: #2A2018;
+  transition: border-color .3s, transform .3s;
+  cursor: pointer;
+}
+.pillar-ds:hover { border-color: rgba(201,162,77,.4); transform: translateX(5px); }
+.pl-icon-ds {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--gg);
+  background-size: 200%;
+  animation: shimmer 5s linear infinite;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px;
+}
+.pl-name-ds {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #F2EDE8;
+  margin-bottom: 3px;
+}
+.pl-desc-ds {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  color: #A09080;
+  line-height: 1.65;
+}
+
+/* ══════════════════════════════════════════
+   PROCESSUS ÉTAPE
+══════════════════════════════════════════ */
+.proc-ds {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+.pstep-ring-ds {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  border: 2px solid var(--g);
+  background: #2A2018;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.pstep-ring-ds::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,162,77,.2);
+}
+.pstep-ring-inner-ds {
+  font-size: 30px;
+}
+.pstep-title-ds {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #F2EDE8;
+}
+.pstep-desc-ds {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  color: #A09080;
+  line-height: 1.65;
+}
+
+/* ══════════════════════════════════════════
+   CALENDRIER
+══════════════════════════════════════════ */
+.cal-ds-wrap {
+  background: #2A2018;
+  border: 1px solid rgba(242,237,232,.15);
+  border-radius: var(--br2);
+  padding: 18px;
+}
+.cal-ds-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.cal-ds-nav {
+  background: none;
+  border: 1px solid rgba(242,237,232,.15);
+  border-radius: 8px;
+  width: 32px; height: 32px;
+  color: #F2EDE8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s;
+}
+.cal-ds-nav:hover { border-color: var(--g); }
+.cal-ds-month {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #F2EDE8;
+}
+.cal-ds-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 14px;
+}
+.cal-ds-dh {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #A09080;
+  text-align: center;
+  padding: 4px 0;
+}
+.cal-ds-day {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #F2EDE8;
+  text-align: center;
+  padding: 7px 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .2s;
+  border: 1px solid transparent;
+}
+.cal-ds-day:hover { background: rgba(201,162,77,.1); border-color: rgba(201,162,77,.25); }
+.cal-ds-day.sel { background: var(--gg); background-size: 200%; color: #1A1008; font-weight: 700; }
+.cal-ds-day.today { border-color: rgba(230,112,88,.4); color: var(--t); }
+.cal-ds-day.disabled { color: #504538; cursor: default; opacity: .4; }
+.cal-ds-day.empty { cursor: default; }
+
+.cal-ds-slots { margin-top: 14px; }
+.cal-ds-slot-lbl {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #A09080;
+  margin-bottom: 10px;
+}
+.cal-ds-slot-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.cal-ds-slot {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #F2EDE8;
+  background: #1C1612;
+  border: 1px solid rgba(242,237,232,.15);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.cal-ds-slot:hover { border-color: var(--g); }
+.cal-ds-slot.sel { border-color: var(--g); background: rgba(201,162,77,.15); color: var(--g); }
+.cal-ds-slot.disabled { opacity: .4; cursor: default; }
+
+.cal-ds-selected {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(201,162,77,.1);
+  border: 1px solid rgba(201,162,77,.25);
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: var(--g);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════ */
+.toast-ds {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #2A2018;
+  border: 1px solid rgba(201,162,77,.2);
+  border-radius: 14px;
+  padding: 14px 20px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #F2EDE8;
+  font-weight: 500;
+}
+.toast-ds-error {
+  border-color: rgba(230,112,88,.3);
+}
+.toast-ic-ds {
+  color: var(--g);
+  font-size: 16px;
+}
+.toast-ic-err {
+  color: var(--t);
+}
+
+/* ══════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════ */
+.modal-ds {
+  background: #2A2018;
+  border: 1px solid rgba(201,162,77,.3);
+  border-radius: 24px;
+  padding: 36px;
+  text-align: center;
+  max-width: 440px;
+}
+.modal-icon-ds { font-size: 44px; margin-bottom: 14px; }
+.modal-title-ds {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #F2EDE8;
+  margin-bottom: 8px;
+}
+.modal-sub-ds {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #A09080;
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+.modal-recap-ds {
+  background: var(--n);
+  border-radius: 14px;
+  padding: 16px 18px;
+  text-align: left;
+  margin-bottom: 18px;
+}
+.modal-recap-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: #A09080;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(201,162,77,.1);
+}
+.modal-recap-row:last-child {
+  border-bottom: none;
+  font-weight: 700;
+  color: var(--g);
+  font-size: 14px;
+  padding-top: 8px;
+}
+.modal-notif-ds {
+  display: flex;
+  gap: 10px;
+  background: rgba(201,162,77,.08);
+  border: 1px solid rgba(201,162,77,.2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: #A09080;
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+/* ══════════════════════════════════════════
+   MARQUEE BAND
+══════════════════════════════════════════ */
+@keyframes marquee-ds { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+.marquee-ds-wrap {
+  background: var(--t);
+  padding: 14px 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.marquee-ds-track {
+  display: flex;
+  animation: marquee-ds 18s linear infinite;
+  white-space: nowrap;
+}
+.mq-ds-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255,255,255,.88);
+  flex-shrink: 0;
+}
+.mq-ds-sep { color: rgba(255,255,255,.5); font-style: normal; }
+
+/* ══════════════════════════════════════════
+   GOLD BAR
+══════════════════════════════════════════ */
+@keyframes shimmer-gb { 0% { background-position: -300% } 100% { background-position: 300% } }
+.gbar-ds {
+  height: 4px;
+  background: linear-gradient(90deg, #C9A24D, #F0D080, #C9A24D, #A8842A, #F0D080, #C9A24D);
+  background-size: 400%;
+  animation: shimmer-gb 4s linear infinite;
+  border-radius: 2px;
+}
+
+/* ══════════════════════════════════════════
+   THÈME TOGGLE
+══════════════════════════════════════════ */
+.theme-toggle-ds {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid rgba(201,162,77,.35);
+  border-radius: 30px;
+  padding: 6px 14px 6px 10px;
+  cursor: pointer;
+  transition: border-color .3s;
+}
+.theme-toggle-ds:hover { border-color: var(--g); background: rgba(201,162,77,.08); }
+.tt-track-ds {
+  width: 34px; height: 18px;
+  border-radius: 9px;
+  background: rgba(201,162,77,.2);
+  border: 1px solid rgba(201,162,77,.3);
+  position: relative;
+}
+.tt-thumb-ds {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--g);
+  position: absolute;
+  top: 2px; left: 2px;
+  transition: transform .35s;
+}
+.tt-label-ds {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #C8B8A8;
+  letter-spacing: 1px;
+}
+
+/* ══════════════════════════════════════════
+   FLOAT CARD
+══════════════════════════════════════════ */
+.float-card-ds {
+  background: var(--n);
+  border: 1px solid rgba(201,162,77,.2);
+  border-radius: 16px;
+  padding: 18px 22px;
+  animation: floatY 4.5s ease-in-out infinite;
+  display: inline-block;
+}
+.float-val-ds {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  background: var(--gg);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+  line-height: 1;
+}
+.float-lbl-ds {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #A09080;
+  margin-top: 4px;
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.ds-footer {
+  background: var(--n);
+  padding: 20px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border-top: 3px solid transparent;
+  border-image: var(--gg) 1;
+}
+.ds-footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  background: var(--gg);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+.ds-footer-info {
+  font-size: 9px;
+  color: rgba(255,255,255,.2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: right;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="ds-header">
+  <div class="ds-header-inner">
+    <div class="ds-header-left">
+      <div class="ds-header-eyebrow">Design System · Coco DesigNC · 2026</div>
+      <div class="ds-header-title">Planche<br><span>Composants</span></div>
+      <p class="ds-header-sub">Inventaire complet des composants du site PetaleDeSucre.nc · Boutons · Typographie · Palette · Cartes · Formulaires · Modales · Calendrier · Badges</p>
+    </div>
+    <div class="ds-header-right">
+      <div class="ds-header-brand">PS</div>
+      <div class="ds-header-version">Pétales de Sucre · 2026</div>
+    </div>
+  </div>
+</header>
+
+<main class="ds-main">
+
+  <!-- ═══════════════════════════════════════
+       01. PALETTE DE COULEURS
+  ═══════════════════════════════════════ -->
+  <section class="ds-sec">
+    <div class="ds-sec-hd">
+      <div class="ds-sec-num">01</div>
+      <div class="ds-sec-info">
+        <h2>Palette de Couleurs</h2>
+        <p>Charte graphique complète · Primaires + Neutres + Thème</p>
+      </div>
+      <div class="ds-sec-line"></div>
+    </div>
+
+    <div class="ds-card">
+      <div class="ds-card-label">Couleurs primaires</div>
+      <div class="palette-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#E67058;"></div>
+          <div class="swatch-name">Terracotta</div>
+          <div class="swatch-hex">--t · #E67058</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#C9A24D;"></div>
+          <div class="swatch-name">Or principal</div>
+          <div class="swatch-hex">--g · #C9A24D</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#F0D080;"></div>
+          <div class="swatch-name">Or clair</div>
+          <div class="swatch-hex">--gl · #F0D080</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#A8842A;"></div>
+          <div class="swatch-name">Or foncé</div>
+          <div class="swatch-hex">--gd · #A8842A</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#E8A88B;"></div>
+          <div class="swatch-name">Crème accent</div>
+          <div class="swatch-hex">--c · #E8A88B</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color swatch-gradient" style="width:80px;height:80px;border-radius:16px;"></div>
+          <div class="swatch-name">Gradient Or</div>
+          <div class="swatch-hex">--gg · 135deg</div>
+        </div>
+      </div>
+      <div style="margin-top: 28px;">
+        <div class="ds-card-label">Neutres · Thème Prestige (sombre)</div>
+        <div class="palette-grid">
+          <div class="swatch">
+            <div class="swatch-color" style="background:#1C1612;"></div>
+            <div class="swatch-name">Fond principal</div>
+            <div class="swatch-hex">--n · #1C1612</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#251D16;"></div>
+            <div class="swatch-name">Fond sec. 2</div>
+            <div class="swatch-hex">--n2 · #251D16</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#2A2018;"></div>
+            <div class="swatch-name">Fond cartes</div>
+            <div class="swatch-hex">bg-card · #2A2018</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#F2EDE8;"></div>
+            <div class="swatch-name">Texte titres</div>
+            <div class="swatch-hex">--tx · #F2EDE8</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#C8B8A8;border:1px solid #E0D8D0"></div>
+            <div class="swatch-name">Texte corps</div>
+            <div class="swatch-hex">--tm · #C8B8A8</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#A09080;"></div>
+            <div class="swatch-name">Texte muted</div>
+            <div class="swatch-hex">--tx-m · #A09080</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 28px;">
+        <div class="ds-card-label">Neutres · Thème Crème (clair)</div>
+        <div class="palette-grid">
+          <div class="swatch">
+            <div class="swatch-color" style="background:#FAF3EE;border:1px solid #E8E0D8;"></div>
+            <div class="swatch-name">Fond principal</div>
+            <div class="swatch-hex">--f · #FAF3EE</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#F5E9DF;border:1px solid #E8E0D8;"></div>
+            <div class="swatch-name">Fond sec. 2</div>
+            <div class="swatch-hex">--f2 · #F5E9DF</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#FFFFFF;border:1px solid #E8E0D8;"></div>
+            <div class="swatch-name">Fond cartes</div>
+            <div class="swatch-hex">bg-card · #FFF</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#1A1008;border:1px solid #E8E0D8;"></div>
+            <div class="swatch-name">Texte titres</div>
+            <div class="swatch-hex">--tx · #1A1008</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background:#5C3D2E;border:1px solid #E8E0D8;"></div>
+            <div class="swatch-name">Texte corps</div>
+            <div class="swatch-hex">--tm · #5C3D2E</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- ═══════════════════════════════════════
+       02. TYPOGRAPHIE
+  ═══════════════════════════════════════ -->
+  <section class="ds-sec">
+    <div class="ds-sec-hd">
+      <div class="ds-sec-num">02</div>
+      <div class="ds-sec-info">
+        <h2>Typographie</h2>
+        <p>Playfair Display · Montserrat · Hiérarchie complète</p>
+      </div>
+      <div class="ds-sec-line"></div>
+    </div>
+
+    <div class="ds-card">
+      <div class="typo-row">
+        <div class="typo-item">
+          <div class="typo-meta">
+            <div class="typo-role">H1 Hero</div>
+            <div class="typo-spec">Playfair Display 800<br>72–96px · gradient or</div>
+          </div>
+          <div class="t-h1">Pétales</div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-meta">
+            <div class="typo-role">H2 Section</div>
+            <div class="typo-spec">Playfair Display 700<br>36–58px · var(--tx)</div>
+          </div>
+          <div class="t-h2">La crêpe sublimée</div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-meta">
+            <div class="typo-role">H3 Carte</div>
+            <div class="typo-spec">Playfair Display 700<br>24–26px · var(--tx)</div>
+          </div>
+          <div class="t-h3">Le Classique</div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-meta">
+            <div class="typo-role">Eyebrow</div>
+            <div class="typo-spec">Montserrat 600<br>10px · letterspacing 3.5px<br>uppercase · or + ligne</div>
+          </div>
+          <div class="t-eyebrow">Nos créations</div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-meta">
+            <div class="typo-role">Texte corps</div>
+            <div class="typo-spec">Montserrat 400<br>14px · line-height 1.8</div>
+          </div>
+          <div class="t-body">Des bouquets de crêpes artisanaux confectionnés à la commande dans notre atelier de Dumbéa. Une alternative savoureuse et mémorable aux bouquets de fleurs classiques.</div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-meta">
+            <div class="typo-role">Citation</div>
+            <div class="typo-spec">Playfair Display 400<br>22px · italic · terracotta</div>
+          </div>
+          <div class="t-quote">« Les fleurs fanent, mais la gourmandise reste en souvenir. »</div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-meta">
+            <div class="typo-role">Prix</div>
+            <div class="typo-spec">Playfair Display 700<br>26–32px · gradient or shimmer</div>
+          </div>
+          <div class="t-price">6 000 F CFP</div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-meta">
+            <div class="typo-role">Caption / Label</div>
+            <div class="typo-spec">Montserrat 500<br>9–10px · uppercase · letterspacing</div>
+          </div>
+          <div class="t-caption">Clic &amp; Collect — Atelier Dumbéa</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- ═══════════════════════════════════════
+       03. BOUTONS
+  ═══════════════════════════════════════ -->
+  <section class="ds-sec">
+    <div class="ds-sec-hd">
+      <div class="ds-sec-num">03</div>
+      <div class="ds-sec-info">
+        <h2>Boutons</h2>
+        <p>5 variantes · Gradient or · Ghost · Terracotta · Navbar</p>
+      </div>
+      <div class="ds-sec-line"></div>
+    </div>
+
+    <div class="comp-grid comp-grid-2" style="gap:16px;">
+      <!-- Fond clair -->
+      <div class="ds-card">
+        <div class="ds-card-label">Sur fond clair</div>
+        <div class="comp-row">
+          <button class="btn-gold"><span>✦</span>Créer mon bouquet</button>
+          <a class="btn-ghost-wh" href="#">Découvrir <span class="arr"></span></a>
+        </div>
+        <div class="comp-row" style="margin-top:16px;">
+          <button class="btn-cmd">Commander</button>
+          <a class="nav-order" href="#">Commander → #config</a>
+        </div>
+        <div class="ds-card-note">
+          <strong>btn-gold</strong> : gradient or animé (shimmer 4s) · hover : translateY(-3px) + shadow renforcée<br>
+          <strong>btn-ghost-wh</strong> : transparent · flèche CSS qui s'allonge au hover<br>
+          <strong>btn-cmd</strong> : terracotta solide · hover : scale(1.04)<br>
+          <strong>nav-order</strong> : bordure or · hover : fond or léger
+        </div>
+      </div>
+      <!-- Fond sombre -->
+      <div class="ds-card" style="background:var(--n);">
+        <div class="ds-card-label">Sur fond sombre (Prestige)</div>
+        <div class="dark-pane" style="padding:0;background:transparent;flex-direction:column;align-items:flex-start;gap:16px;">
+          <div class="comp-row">
+            <button class="btn-gold"><span>✦</span>Commander — Valider et payer</button>
+          </div>
+          <div class="comp-row">
+            <a class="btn-ghost-dark" href="#">Découvrir <span class="arr"></span></a>
+            <button class="nav-order">Commander → #config</button>
+          </div>
+        </div>
+        <div class="ds-card-note" style="border-color:rgba(242,237,232,.08);color:#706050;">
+          Même classe CSS, rendu adapté par les variables thème dark
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- ═══════════════════════════════════════
+       04. BADGES & TAGS
+  ═══════════════════════════════════════ -->
+  <section class="ds-sec">
+    <div class="ds-sec-hd">
+      <div class="ds-sec-num">04</div>
+      <div class="ds-sec-info">
+        <h2>Badges &amp; Tags</h2>
+        <p>Étiquettes de statut · Tags produit · Badge SSL</p>
+      </div>
+      <div class="ds-sec-line"></div>
+    </div>
+
+    <div class="ds-card">
+      <div class="ds-card-label">Tous les badges du site</div>
+      <div class="comp-row" style="flex-wrap:wrap;gap:12px;">
+        <!-- Badge format (pcard) -->
+        <span class="pcard-badge-demo" style="background:rgba(201,162,77,.15);border:1px solid rgba(201,162,77,.4);color:#C9A24D;">Format Intime</span>
+        <span class="pcard-badge-demo" style="background:rgba(201,162,77,.15);border:1px solid rgba(201,162,77,.4);color:#C9A24D;">★ Signature</span>
+        <span class="pcard-badge-demo" style="background:rgba(201,162,77,.15);border:1px solid rgba(201,162,77,.4);color:#C9A24D;">Collection Prestige</span>
+        <!-- Badge hit -->
+        <span class="pcard-hit-demo">Le + populaire</span>
+        <!-- Tag produit -->
+        <span class="tag-demo">Vanille</span>
+        <span class="tag-demo">Chocolat</span>
+        <span class="tag-demo">Caramel beurre salé</span>
+        <!-- Tag image -->
+        <span class="concept-img-tag-demo">Atelier Dumbéa</span>
+        <!-- Badge SSL -->
+        <span class="badge-ssl">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L2 3V7C2 9.8 4.2 12.4 7 13C9.8 12.4 12 9.8 12 7V3L7 1Z" fill="#C9A24D" opacity=".85"/></svg>
+          SSL 256 bits · Paiement sécurisé
+        </span>
+      </div>
+      <div class="ds-card-note">
+        <strong>pcard-badge</strong> : fond transparent teinté · backdrop-filter blur(12px) · positionné en top:16px left:16px<br>
+        <strong>pcard-hit</strong> : terracotta plein · top:16px right:16px<br>
+        <strong>tag</strong> : fond subtil terracotta · border-radius 8px · utilisé dans les fiches produit<br>
+        <strong>concept-img-tag</strong> : fond sombre · bordure or · positionnée sur la photo<br>
+        <strong>badge-ssl</strong> : fond or translucide · bordure or · dans l'étape paiement
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- ═══════════════════════════════════════
+       05. CHAMPS DE FORMULAIRE
+  ═══════════════════════════════════════ -->
+  <section class="ds-sec">
+    <div class="ds-sec-hd">
+      <div class="ds-sec-num">05</div>
+      <div class="ds-sec-info">
+        <h2>Champs &amp; Formulaire</h2>
+        <p>Inputs · Textarea · Select · Cases à cocher</p>
+      </div>
+      <div class="ds-sec-line"></div>
+    </div>
+
+    <div class="comp-grid comp-grid-2" style="gap:16px;">
+      <!-- Champs standard -->
+      <div class="ds-card" style="background:var(--n);">
+        <div class="ds-card-label">Champs formulaire devis (.fi)</div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div>
+            <label class="fl-demo">Prénom & Nom</label>
+            <input class="fi-demo" type="text" placeholder="Camille Laroque">
+          </div>
+          <div>
+            <label class="fl-demo">Email</label>
+            <input class="fi-demo" type="email" placeholder="votre@email.nc">
+          </div>
+          <div>
+            <label class="fl-demo">Date souhaitée</label>
+            <input class="fi-demo" type="date">
+          </div>
+          <div>
+            <label class="fl-demo">Message & précisions</label>
+            <textarea class="fi-demo" rows="3" placeholder="Parfum souhaité, couleur de ruban…" style="resize:vertical;"></textarea>
+          </div>
+        </div>
+        <div class="ds-card-note" style="border-color:rgba(242,237,232,.08);color:#706050;">
+          <strong>.fl</strong> : Montserrat 700 · 10px · uppercase · letterspacing 1.5px<br>
+          <strong>.fi</strong> : fond #2A2018 · bordure rgba(F2EDE8,.18) · border-radius 12px<br>
+          Focus : border-color or + box-shadow 0 0 0 3px rgba(or,.12)
+        </div>
+      </div>
+
+      <!-- Champs paiement + checkbox -->
+      <div class="ds-card" style="background:var(--n);">
+        <div class="ds-card-label">Champs paiement (.pay-input) + Cases</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <label class="fl-demo">Titulaire de la carte</label>
+            <input class="pay-input-demo" type="text" placeholder="NOM Prénom">
+          </div>
+          <div>
+            <label class="fl-demo">Numéro de carte</label>
+            <input class="pay-input-demo" type="text" placeholder="•••• •••• •••• ••••">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label class="fl-demo">Expiration</label>
+              <input class="pay-input-demo" type="text" placeholder="MM / AA">
+            </div>
+            <div>
+              <label class="fl-demo">CVV</label>
+              <input class="pay-input-demo" type="text" placeholder="•••">
+            </div>
+          </div>
+          <div style="padding-top:12px;border-top:1px solid rgba(242,237,232,.08);display:flex;flex-direction:column;gap:10px;">
+            <label class="check-demo-wrap">
+              <div class="check-box-demo checked"></div>
+              <span class="check-txt-demo">J'accepte la <span style="color:var(--g);text-decoration:underline;">Politique de confidentialité</span></span>
+            </label>
+            <label class="check-demo-wrap">
+              <div class="check-box-demo checked"></div>
+              <span class="check-txt-demo">Je reconnais le paiement sécurisé SSL 256 bits</span>
+            </label>
+            <label class="check-demo-wrap">
+              <div class="check-box-demo"></div>
+              <span class="check-txt-demo">J'ai lu la <span style="color:var(--g);text-decoration:underline;">politique de retour</span></span>
+            </label>
+          </div>
+        </div>
+        <div class="ds-card-note" style="border-color:rgba(242,237,232,.08);color:#706050;">
+          Checkbox cochée : gradient or animé · tick #1A1008<br>
+          Non cochée : fond var(--fmt-bg) · bordure rgba(F2EDE8,.3)<br>
+          Animation <strong>shake</strong> si Commander cliqué sans cocher
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- ═══════════════════════════════════════
+       06. CARTES PRODUIT
+  ═══════════════════════════════════════ -->
+  <section class="ds-sec">
+    <div class="ds-sec-hd">
+      <div class="ds-sec-num">06</div>
+      <div class="ds-sec-info">
+        <h2>Cartes Produit</h2>
+        <p>3 formats · Raffiné · Classique · Prestige</p>
+      </div>
+      <div class="ds-sec-line"></div>
+    </div>
+
+    <div class="comp-grid comp-grid-3" style="gap:20px;">
+      <!-- Raffiné -->
+      <div class="pcard-ds">
+        <div class="pcard-ds-img">
+          <div class="pcard-badge-demo" style="position:absolute;top:14px;left:14px;background:rgba(201,162,77,.15);border:1px solid rgba(201,162,77,.4);color:#C9A24D;">Format Intime</div>
+          <span style="font-size:52px;opacity:.5;">🌸</span>
+          <span style="position:absolute;bottom:12px;right:14px;font-family:'Playfair Display',serif;font-size:48px;font-weight:400;color:rgba(242,237,232,.07);line-height:1;">3</span>
+        </div>
+        <div class="pcard-ds-body">
+          <h3 class="pcard-ds-name">Le Raffiné</h3>
+          <div class="pcard-ds-sub">3 crêpes · Format intime</div>
+          <p class="pcard-ds-desc">Trois crêpes artisanales sublimées en roses, pour un geste élégant et poétique.</p>
+          <div class="pcard-ds-tags">
+            <span class="tag-demo">Vanille</span>
+            <span class="tag-demo">Chocolat</span>
+            <span class="tag-demo">Caramel</span>
+          </div>
+          <div class="pcard-ds-ft">
+            <div>
+              <div class="pcard-ds-price">3 000 F CFP</div>
+              <div style="font-size:10px;color:#706050;margin-top:2px;font-family:'Montserrat',sans-serif;letter-spacing:1px;">Retrait en boutique</div>
+            </div>
+            <button class="btn-cmd">Commander</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classique — mise en avant -->
+      <div class="pcard-ds" style="border-color:rgba(201,162,77,.35);">
+        <div class="pcard-ds-img" style="background:linear-gradient(145deg,#1A2214,#0F1A0A);">
+          <div class="pcard-badge-demo" style="position:absolute;top:14px;left:14px;background:rgba(201,162,77,.15);border:1px solid rgba(201,162,77,.4);color:#C9A24D;">★ Signature</div>
+          <div class="pcard-hit-demo" style="position:absolute;top:14px;right:14px;">Le + populaire</div>
+          <span style="font-size:52px;opacity:.5;">💐</span>
+          <span style="position:absolute;bottom:12px;right:14px;font-family:'Playfair Display',serif;font-size:48px;font-weight:400;color:rgba(242,237,232,.07);line-height:1;">7</span>
+        </div>
+        <div class="pcard-ds-body">
+          <h3 class="pcard-ds-name">Le Classique</h3>
+          <div class="pcard-ds-sub">7 crêpes · Format cadeau ★</div>
+          <p class="pcard-ds-desc">Le bouquet signature. Sept roses de crêpes pour un effet « Waouh » garanti.</p>
+          <div class="pcard-ds-tags">
+            <span class="tag-demo">Vanille</span>
+            <span class="tag-demo">Chocolat</span>
+            <span class="tag-demo">Noisette</span>
+          </div>
+          <div class="pcard-ds-ft">
+            <div>
+              <div class="pcard-ds-price">6 000 F CFP</div>
+              <div style="font-size:10px;color:#706050;margin-top:2px;font-family:'Montserrat',sans-serif;letter-spacing:1px;">Le bouquet signature</div>
+            </div>
+            <button class="btn-gold" style="font-size:10px;padding:12px 18px;">Commander</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prestige -->
+      <div class="pcard-ds" style="background:#1A1208;">
+        <div class="pcard-ds-img" style="background:linear-gradient(145deg,#1A1208,#080604);">
+          <div class="pcard-badge-demo" style="position:absolute;top:14px;left:14px;background:rgba(201,162,77,.15);border:1px solid rgba(201,162,77,.4);color:#C9A24D;">Collection Prestige</div>
+          <span style="font-size:52px;opacity:.5;">👑</span>
+          <span style="position:absolute;bottom:12px;right:14px;font-family:'Playfair Display',serif;font-size:48px;font-weight:400;color:rgba(242,237,232,.07);line-height:1;">12</span>
+        </div>
+        <div class="pcard-ds-body">
+          <h3 class="pcard-ds-name">Le Prestige</h3>
+          <div class="pcard-ds-sub">12 crêpes · Édition d'exception</div>
+          <p class="pcard-ds-desc">L'édition d'exception. Douze roses pour les grandes occasions inoubliables.</p>
+          <div class="pcard-ds-tags">
+            <span class="tag-demo">Vanille</span>
+            <span class="tag-demo">Chocolat</span>
+            <span class="tag-demo">Caramel</span>
+          </div>
+          <div class="pcard-ds-ft">
+            <div>
+              <div class="pcard-ds-price">9 000 F CFP</div>
+              <div style="font-size:10px;color:#706050;margin-top:2px;font-family:'Montserrat',sans-serif;letter-spacing:1px;">Édition d'exception</div>
+            </div>
+            <button class="btn-cmd">Commander</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- ═══════════════════════════════════════
+       07. COMPOSANTS NARRATIFS
+  ═══════════════════════════════════════ -->
+  <section class="ds-sec">
+    <div class="ds-sec-hd">
+      <div class="ds-sec-num">07</div>
+      <div class="ds-sec-info">
+        <h2>Composants Narratifs</h2>
+        <p>Pilier · Étape processus · Témoignage · Float card</p>
+      </div>
+      <div class="ds-sec-line"></div>
+    </div>
+
+    <div class="comp-grid comp-grid-2" style="gap:16px;">
+      <!-- Piliers -->
+      <div class="ds-card" style="background:var(--n);">
+        <div class="ds-card-label">Piliers de valeur (.pillar)</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="pillar-ds">
+            <div class="pl-icon-ds">🌿</div>
+            <div>
+              <div class="pl-name-ds">Authentique &amp; Fait-maison</div>
+              <div class="pl-desc-ds">Pâte à crêpe préparée dans notre atelier. Aucun intermédiaire entre votre commande et notre four.</div>
+            </div>
+          </div>
+          <div class="pillar-ds">
+            <div class="pl-icon-ds">💎</div>
+            <div>
+              <div class="pl-name-ds">Luxe accessible</div>
+              <div class="pl-desc-ds">Art comestible entre haute pâtisserie et bouquet de fleurs raffiné.</div>
+            </div>
+          </div>
+          <div class="pillar-ds">
+            <div class="pl-icon-ds">🌺</div>
+            <div>
+              <div class="pl-name-ds">Local &amp; à la commande</div>
+              <div class="pl-desc-ds">100% Nouvelle-Calédonie. Fraîcheur absolue garantie.</div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card-note" style="border-color:rgba(242,237,232,.08);color:#706050;">
+          Icône : fond gradient or 44px border-radius 10px<br>
+          Hover : translateX(5px) + border-color or
+        </div>
+      </div>
+
+      <!-- Étapes processus + Float + Témoignage -->
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <!-- Processus étape -->
+        <div class="ds-card" style="background:var(--n);">
+          <div class="ds-card-label">Étape processus (.pstep)</div>
+          <div style="display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px;">
+            <div class="proc-ds">
+              <div class="pstep-ring-ds"><div class="pstep-ring-inner-ds">🧑‍🍳</div></div>
+              <div class="pstep-title-ds">La pâte maison</div>
+              <div class="pstep-desc-ds" style="max-width:120px;">Recette familiale, œufs frais, touche de vanille.</div>
+            </div>
+            <div class="proc-ds">
+              <div class="pstep-ring-ds"><div class="pstep-ring-inner-ds">🌹</div></div>
+              <div class="pstep-title-ds">Le façonnage</div>
+              <div class="pstep-desc-ds" style="max-width:120px;">Sculptée à la main en rose, fourrée selon choix.</div>
+            </div>
+            <div class="proc-ds">
+              <div class="pstep-ring-ds"><div class="pstep-ring-inner-ds">🎀</div></div>
+              <div class="pstep-title-ds">Le packaging</div>
+              <div class="pstep-desc-ds" style="max-width:120px;">Papier satiné, papillons dorés, ruban couleur.</div>
+            </div>
+            <div class="proc-ds">
+              <div class="pstep-ring-ds"><div class="pstep-ring-inner-ds">🏪</div></div>
+              <div class="pstep-title-ds">Retrait boutique</div>
+              <div class="pstep-desc-ds" style="max-width:120px;">Atelier Dumbéa, créneau réservé en ligne.</div>
+            </div>
+          </div>
+          <div class="ds-card-note" style="border-color:rgba(242,237,232,.08);color:#706050;">
+            Anneau double : cercle or 2px + cercle fantôme rgba(or,.2)<br>
+            Connecteurs : tirets entre les étapes (SVG ou border)
+          </div>
+        </div>
+
+        <!-- Float card -->
+        <div class="ds-card">
+          <div class="ds-card-label">Float card (.concept-float) · animation floatY</div>
+          <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+            <div class="float-card-ds">
+              <div class="float-val-ds">3 formats</div>
+              <div class="float-lbl-ds">Le Raffiné · Classique · Prestige</div>
+            </div>
+            <div class="ds-card-note" style="flex:1;border-top:none;padding-top:0;border-left:2px solid #F0EAE4;padding-left:16px;margin-top:0;">
+              Fond sombre · bordure or légère · animation floatY 4.5s<br>
+              Valeur en gradient or shimmer (Playfair 32px)<br>
+              Label en Montserrat 9px uppercase
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Témoignages -->
+    <div class="comp-grid comp-grid-3" style="gap:16px;margin-top:0;">
+      <div class="tcard-ds">
+        <div class="tc-stars-ds">⭐⭐⭐⭐⭐</div>
+        <p class="tc-txt-ds">« J'ai commandé le Prestige pour l'anniversaire de ma mère. Elle a refusé de le manger tellement c'était beau ! »</p>
+        <div class="tc-auth-ds">
+          <div class="tc-av-ds">👩</div>
+          <div>
+            <div class="tc-name-ds">Sophie L.</div>
+            <div class="tc-loc-ds">Nouméa, NC</div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard-ds">
+        <div class="tc-stars-ds">⭐⭐⭐⭐⭐</div>
+        <p class="tc-txt-ds">« 20 bouquets pour notre séminaire. Livrés à l'heure, parfaitement présentés. Nos collaborateurs ont été bluffés. »</p>
+        <div class="tc-auth-ds">
+          <div class="tc-av-ds">👨</div>
+          <div>
+            <div class="tc-name-ds">Marc D.</div>
+            <div class="tc-loc-ds">Dumbéa, NC · RH Manager</div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard-ds">
+        <div class="tc-stars-ds">⭐⭐⭐⭐⭐</div>
+        <p class="tc-txt-ds">« Le Classique caramel beurre salé pour la Saint-Valentin. « Dites-le avec gourmandise » : on est totalement conquis ! »</p>
+        <div class="tc-auth-ds">
+          <div class="tc-av-ds">👩</div>
+          <div>
+            <div class="tc-name-ds">Camille R.</div>
+            <div class="tc-loc-ds">Païta, NC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- ═══════════════════════════════════════
+       08. CALENDRIER
+  ═══════════════════════════════════════ -->
+  <section class="ds-sec">
+    <div class="ds-sec-hd">
+      <div class="ds-sec-num">08</div>
+      <div class="ds-sec-info">
+        <h2>Calendrier de Créneaux</h2>
+        <p>Étape 5 du configurateur · Sélection date + slot horaire</p>
+      </div>
+      <div class="ds-sec-line"></div>
+    </div>
+
+    <div class="comp-grid comp-grid-2" style="gap:16px;">
+      <div class="ds-card" style="background:var(--n);">
+        <div class="ds-card-label">Calendrier (.cal-wrap)</div>
+        <div class="cal-ds-wrap">
+          <div class="cal-ds-header">
+            <button class="cal-ds-nav">‹</button>
+            <span class="cal-ds-month">Mars 2026</span>
+            <button class="cal-ds-nav">›</button>
+          </div>
+          <div class="cal-ds-grid">
+            <div class="cal-ds-dh">L</div><div class="cal-ds-dh">M</div><div class="cal-ds-dh">M</div>
+            <div class="cal-ds-dh">J</div><div class="cal-ds-dh">V</div><div class="cal-ds-dh">S</div>
+            <div class="cal-ds-dh" style="color:var(--t)">D</div>
+            <!-- Row 1 -->
+            <div class="cal-ds-day empty"></div><div class="cal-ds-day empty"></div>
+            <div class="cal-ds-day empty"></div><div class="cal-ds-day empty"></div>
+            <div class="cal-ds-day empty"></div><div class="cal-ds-day">1</div>
+            <div class="cal-ds-day disabled">2</div>
+            <!-- Row 2 -->
+            <div class="cal-ds-day">3</div><div class="cal-ds-day">4</div>
+            <div class="cal-ds-day">5</div><div class="cal-ds-day">6</div>
+            <div class="cal-ds-day">7</div><div class="cal-ds-day">8</div>
+            <div class="cal-ds-day disabled">9</div>
+            <!-- Row 3 -->
+            <div class="cal-ds-day disabled" style="opacity:.4">10</div>
+            <div class="cal-ds-day today">11</div>
+            <div class="cal-ds-day">12</div><div class="cal-ds-day">13</div>
+            <div class="cal-ds-day">14</div><div class="cal-ds-day">15</div>
+            <div class="cal-ds-day disabled">16</div>
+            <!-- Row 4 -->
+            <div class="cal-ds-day">17</div>
+            <div class="cal-ds-day sel">18</div>
+            <div class="cal-ds-day">19</div><div class="cal-ds-day">20</div>
+            <div class="cal-ds-day">21</div><div class="cal-ds-day">22</div>
+            <div class="cal-ds-day disabled">23</div>
+          </div>
+          <div class="cal-ds-slots">
+            <div class="cal-ds-slot-lbl">Créneaux disponibles — 18 mars</div>
+            <div class="cal-ds-slot-row">
+              <div class="cal-ds-slot disabled">08h00</div>
+              <div class="cal-ds-slot sel">09h00</div>
+              <div class="cal-ds-slot">10h00</div>
+              <div class="cal-ds-slot">11h00</div>
+              <div class="cal-ds-slot">14h00</div>
+              <div class="cal-ds-slot disabled">15h00</div>
+              <div class="cal-ds-slot">16h00</div>
+              <div class="cal-ds-slot">17h00</div>
+            </div>
+          </div>
+          <div class="cal-ds-selected">
+            <span style="font-size:14px;">✦</span>
+            <span>18/03/2026 à 09h00</span>
+          </div>
+        </div>
+        <div class="ds-card-note" style="border-color:rgba(242,237,232,.08);color:#706050;">
+          Jours passés & dimanches : disabled<br>
+          Jour sélectionné : gradient or · texte #1A1008<br>
+          Créneaux pris : opacity .4 · cursor default<br>
+          Badge confirmation : fond or translucide · icône ✦
+        </div>
+      </div>
+
+      <!-- États du calendrier -->
+      <div class="ds-card" style="background:var(--n);">
+        <div class="ds-card-label">États des jours du calendrier</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">
+          <div style="text-align:center;">
+            <div class="cal-ds-day" style="border:1px solid transparent;">14</div>
+            <div style="font-size:9px;color:#706050;margin-top:6px;font-family:'Montserrat',sans-serif;letter-spacing:1px;">Disponible</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="cal-ds-day today">15</div>
+            <div style="font-size:9px;color:#706050;margin-top:6px;font-family:'Montserrat',sans-serif;letter-spacing:1px;">Aujourd'hui</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="cal-ds-day sel">18</div>
+            <div style="font-size:9px;color:#706050;margin-top:6px;font-family:'Montserrat',sans-serif;letter-spacing:1px;">Sélectionné</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="cal-ds-day disabled">9</div>
+            <div style="font-size:9px;color:#706050;margin-top:6px;font-family:'Montserrat',sans-serif;letter-spacing:1px;">Dimanche</div>
+          </div>
+        </div>
+        <div class="ds-card-label" style="margin-top:20px;">États des créneaux (.cal-slot)</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="cal-ds-slot">09h00</div>
+            <span style="font-size:10px;color:#706050;font-family:'Montserrat',sans-serif;">Libre — hover border-color or</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="cal-ds-slot sel">10h00</div>
+            <span style="font-size:10px;color:#706050;font-family:'Montserrat',sans-serif;">Sélectionné — fond or léger · couleur or</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="cal-ds-slot disabled">08h00</div>
+            <span style="font-size:10px;color:#706050;font-family:'Montserrat',sans-serif;">Indisponible — opacity .4 · cursor default</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- ═══════════════════════════════════════
+       09. NOTIFICATIONS (TOAST + MODAL)
+  ═══════════════════════════════════════ -->
+  <section class="ds-sec">
+    <div class="ds-sec-hd">
+      <div class="ds-sec-num">09</div>
+      <div class="ds-sec-info">
+        <h2>Notifications</h2>
+        <p>Toast non-bloquant · Modal de confirmation</p>
+      </div>
+      <div class="ds-sec-line"></div>
+    </div>
+
+    <div class="comp-grid comp-grid-2" style="gap:16px;">
+      <!-- Toast -->
+      <div class="ds-card" style="background:var(--n);">
+        <div class="ds-card-label">Toast (.toast) · 3 variantes</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="toast-ds">
+            <span class="toast-ic-ds">✦</span>
+            <span style="font-family:'Montserrat',sans-serif;font-size:13px;color:#F2EDE8;">Email &amp; SMS de confirmation envoyés !</span>
+          </div>
+          <div class="toast-ds">
+            <span class="toast-ic-ds">✦</span>
+            <span style="font-family:'Montserrat',sans-serif;font-size:13px;color:#F2EDE8;">Inscription newsletter confirmée !</span>
+          </div>
+          <div class="toast-ds toast-ds-error">
+            <span class="toast-ic-err">⚠️</span>
+            <span style="font-family:'Montserrat',sans-serif;font-size:13px;color:#F2EDE8;">Veuillez choisir un créneau de retrait</span>
+          </div>
+          <div class="toast-ds toast-ds-error">
+            <span class="toast-ic-err">⚠️</span>
+            <span style="font-family:'Montserrat',sans-serif;font-size:13px;color:#F2EDE8;">Veuillez accepter la politique de confidentialité</span>
+          </div>
+        </div>
+        <div class="ds-card-note" style="border-color:rgba(242,237,232,.08);color:#706050;">
+          Position : fixed bottom:28px right:28px · z-index 3000<br>
+          Animation : opacity 0→1 + translateY 12px→0<br>
+          Masquage automatique après 4 secondes<br>
+          Icône ✦ or pour succès · ⚠️ + border terracotta pour erreur
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="ds-card" style="background:var(--n2);">
+        <div class="ds-card-label">Modal confirmation (.order-modal)</div>
+        <div class="modal-ds">
+          <div class="modal-icon-ds">✅</div>
+          <div class="modal-title-ds">Commande confirmée !</div>
+          <p class="modal-sub-ds">Merci pour votre confiance.<br>Votre bouquet sera prêt à l'heure choisie.</p>
+          <div class="modal-recap-ds">
+            <div class="modal-recap-row"><span>Format</span><span>Le Classique</span></div>
+            <div class="modal-recap-row"><span>Parfum</span><span>Vanille</span></div>
+            <div class="modal-recap-row"><span>Fourrage</span><span>Caramel</span></div>
+            <div class="modal-recap-row"><span>Ruban</span><span>Rouge passion</span></div>
+            <div class="modal-recap-row"><span>Créneau</span><span>18/03 à 09h00</span></div>
+            <div class="modal-recap-row"><span>Retrait</span><span>Clic &amp; Collect — Dumbéa</span></div>
+            <div class="modal-recap-row"><span>Total</span><span>6 000 F CFP</span></div>
+          </div>
+          <div class="modal-notif-ds">
+            <span style="font-size:18px;flex-shrink:0;">📧</span>
+            <span>Email &amp; SMS de confirmation envoyés à vos coordonnées.</span>
+          </div>
+          <button class="btn-gold" style="width:100%;justify-content:center;">✦ &nbsp; Fermer</button>
+        </div>
+        <div class="ds-card-note" style="border-color:rgba(242,237,232,.08);color:#706050;">
+          Overlay : position fixed · fond rgba(0,0,0,.6) · z-index 2000<br>
+          Apparition : classe "show" → opacity 1 + scale(.97)→1<br>
+          Fermeture : bouton Fermer OU clic sur le fond
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-divider"></div>
+
+  <!-- ═══════════════════════════════════════
+       10. MICRO-COMPOSANTS
+  ═══════════════════════════════════════ -->
+  <section class="ds-sec">
+    <div class="ds-sec-hd">
+      <div class="ds-sec-num">10</div>
+      <div class="ds-sec-info">
+        <h2>Micro-Composants</h2>
+        <p>Gold bar · Marquee · Toggle thème · Curseur · Logos paiement</p>
+      </div>
+      <div class="ds-sec-line"></div>
+    </div>
+
+    <div class="comp-grid comp-grid-2" style="gap:16px;">
+      <!-- Gold bar + Marquee -->
+      <div class="ds-card">
+        <div class="ds-card-label">Gold Bar (.gbar) · Marquee (.marquee-wrap)</div>
+        <div class="gbar-ds" style="margin-bottom:20px;"></div>
+        <div class="marquee-ds-wrap">
+          <div class="marquee-ds-track">
+            <span class="mq-ds-item">Fait-maison à Dumbéa <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">Confectionné à la commande <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">Clic &amp; Collect en boutique <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">L'élégance à croquer <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">7 coloris de ruban <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">Dites-le avec gourmandise <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">Fait-maison à Dumbéa <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">Confectionné à la commande <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">Clic &amp; Collect en boutique <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">L'élégance à croquer <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">7 coloris de ruban <span class="mq-ds-sep">✦</span></span>
+            <span class="mq-ds-item">Dites-le avec gourmandise <span class="mq-ds-sep">✦</span></span>
+          </div>
+        </div>
+        <div class="ds-card-note">
+          <strong>.gbar</strong> : 4px height · gradient or animé (shimmer) · sépare les sections<br>
+          <strong>.marquee-track</strong> : animation translateX 0→-50% en 18–20s linear infinite<br>
+          Fond terracotta #E67058 · Texte Playfair 15px italic
+        </div>
+      </div>
+
+      <!-- Toggle + Curseur + Logos -->
+      <div class="ds-card" style="background:var(--n);">
+        <div class="ds-card-label">Toggle thème · Curseur · Logos paiement</div>
+
+        <div style="margin-bottom:20px;">
+          <div style="font-size:10px;color:#706050;font-family:'Montserrat',sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Toggle Prestige / Crème</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <button class="theme-toggle-ds">
+              <span style="font-size:14px;">🌙</span>
+              <div class="tt-track-ds"><div class="tt-thumb-ds"></div></div>
+              <span style="font-size:14px;">☀️</span>
+              <span class="tt-label-ds">Prestige</span>
+            </button>
+            <button class="theme-toggle-ds">
+              <span style="font-size:14px;">🌙</span>
+              <div class="tt-track-ds"><div class="tt-thumb-ds" style="transform:translateX(16px);"></div></div>
+              <span style="font-size:14px;">☀️</span>
+              <span class="tt-label-ds">Crème</span>
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;padding-top:16px;border-top:1px solid rgba(242,237,232,.08);">
+          <div style="font-size:10px;color:#706050;font-family:'Montserrat',sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Curseur personnalisé</div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div style="width:8px;height:8px;background:var(--g);border-radius:50;"></div>
+            <span style="font-size:11px;color:#A09080;font-family:'Montserrat',sans-serif;">.cur — point or 8px · suit exactement la souris</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;margin-top:10px;">
+            <div style="width:32px;height:32px;border:1px solid rgba(201,162,77,.4);border-radius:50%;"></div>
+            <span style="font-size:11px;color:#A09080;font-family:'Montserrat',sans-serif;">.cur-r — cercle vide 32px · suit avec lerp 13%</span>
+          </div>
+        </div>
+
+        <div style="padding-top:16px;border-top:1px solid rgba(242,237,232,.08);">
+          <div style="font-size:10px;color:#706050;font-family:'Montserrat',sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Logos paiement (SVG inline)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            <svg width="52" height="33" viewBox="0 0 52 33" fill="none" style="border-radius:5px;box-shadow:0 1px 4px rgba(0,0,0,.25);"><rect width="52" height="33" rx="5" fill="#1A1F71"/><text x="8" y="22" font-family="Arial" font-size="13" font-weight="900" fill="white" letter-spacing="-0.5">VISA</text></svg>
+            <svg width="52" height="33" viewBox="0 0 52 33" fill="none" style="border-radius:5px;box-shadow:0 1px 4px rgba(0,0,0,.25);"><rect width="52" height="33" rx="5" fill="#1A1A1A"/><circle cx="20" cy="16.5" r="9" fill="#EB001B"/><circle cx="32" cy="16.5" r="9" fill="#F79E1B"/></svg>
+            <svg width="52" height="33" viewBox="0 0 52 33" fill="none" style="border-radius:5px;box-shadow:0 1px 4px rgba(0,0,0,.25);"><rect width="52" height="33" rx="5" fill="#F7F9FC"/><rect width="52" height="33" rx="5" stroke="#E0E5EF" stroke-width="1"/><text x="10" y="22" font-family="Arial" font-size="10.5" font-weight="800" fill="#003087">Pay</text><text x="26" y="22" font-family="Arial" font-size="10.5" font-weight="800" fill="#009CDE">Pal</text></svg>
+            <svg width="52" height="33" viewBox="0 0 52 33" fill="none" style="border-radius:5px;box-shadow:0 1px 4px rgba(0,0,0,.25);"><rect width="52" height="33" rx="5" fill="#2557D6"/><text x="7" y="21" font-family="Arial" font-size="9" font-weight="800" fill="white" letter-spacing="0.5">AMEX</text></svg>
+            <svg width="52" height="33" viewBox="0 0 52 33" fill="none" style="border-radius:5px;box-shadow:0 1px 4px rgba(0,0,0,.25);"><rect width="52" height="33" rx="5" fill="#006E9F"/><text x="26" y="22" font-family="Arial" font-size="15" font-weight="900" fill="white" text-anchor="middle">CB</text></svg>
+          </div>
+        </div>
+
+        <div class="ds-card-note" style="border-color:rgba(242,237,232,.08);color:#706050;">
+          Toggle : border-radius 30px · bordure or · localStorage mémorisation<br>
+          Curseur : pointer-events none · z-index 9999 (point) / 9998 (cercle)<br>
+          Logos : SVG inline · border-radius 5px · hover translateY(-2px)
+        </div>
+      </div>
+    </div>
+
+    <!-- Rubans couleur -->
+    <div class="ds-card" style="margin-top:0;">
+      <div class="ds-card-label">7 coloris de ruban (.ruban-opt) · Configurateur étape 4</div>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#C9302C;border:2px solid var(--g);box-shadow:0 0 0 4px rgba(201,162,77,.2);"></div>
+          <div style="font-size:9px;color:#9A8878;margin-top:6px;font-family:'Montserrat',sans-serif;">Rouge passion</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#F5C4BA;border:2px solid transparent;"></div>
+          <div style="font-size:9px;color:#9A8878;margin-top:6px;font-family:'Montserrat',sans-serif;">Rose poudré</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#FAF3EE;border:2px solid #E0D8D0;"></div>
+          <div style="font-size:9px;color:#9A8878;margin-top:6px;font-family:'Montserrat',sans-serif;">Blanc ivoire</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#1A1208;border:2px solid transparent;"></div>
+          <div style="font-size:9px;color:#9A8878;margin-top:6px;font-family:'Montserrat',sans-serif;">Noir élégance</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#2E5FA3;border:2px solid transparent;"></div>
+          <div style="font-size:9px;color:#9A8878;margin-top:6px;font-family:'Montserrat',sans-serif;">Bleu royal</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#2A7A4E;border:2px solid transparent;"></div>
+          <div style="font-size:9px;color:#9A8878;margin-top:6px;font-family:'Montserrat',sans-serif;">Vert émeraude</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#C9A24D,#F0D080);border:2px solid transparent;"></div>
+          <div style="font-size:9px;color:#9A8878;margin-top:6px;font-family:'Montserrat',sans-serif;">Or prestige</div>
+        </div>
+        <div style="margin-left:16px;padding-left:16px;border-left:2px solid #F0EAE4;font-size:11px;color:#9A8878;font-family:'Montserrat',sans-serif;line-height:1.7;">
+          Ruban sélectionné :<br>
+          bordure or 2px<br>
+          + halo rgba(or, .2)<br>
+          Nœud SVG : couleur<br>
+          dynamique via JS<br>
+          (darkenHex / lightenHex)
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="ds-footer">
+  <div class="ds-footer-brand">Pétales de Sucre</div>
+  <div class="ds-footer-info">Design System · Coco DesigNC · v4 · 2026<br>10 sections · 40+ composants documentés</div>
+</footer>
+
+</body>
+</html>

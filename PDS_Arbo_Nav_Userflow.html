@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pétales de Sucre — Architecture & Userflow</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --gold: #C9A24D;
+      --gold-light: #F0D080;
+      --gold-dark: #A8842A;
+      --terracotta: #E67058;
+      --bg: #1C1612;
+      --bg2: #251D16;
+      --bg3: #2A2018;
+      --tx: #F2EDE8;
+      --tx2: #C8B8A8;
+      --tx3: #A09080;
+      --bd: rgba(242, 237, 232, .1);
+      --gg: linear-gradient(135deg, #C9A24D 0%, #F0D080 38%, #A8842A 65%, #E8C96A 100%);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--tx);
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      padding: 80px 40px 60px;
+      border-bottom: 1px solid var(--bd);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201, 162, 77, .08), transparent);
+      pointer-events: none;
+    }
+
+    .gbar {
+      height: 3px;
+      background: linear-gradient(90deg, #C9A24D, #F0D080, #C9A24D, #A8842A, #F0D080);
+      background-size: 400%;
+      animation: shimmer 4s linear infinite;
+    }
+
+    @keyframes shimmer {
+      from {
+        background-position: 0% center
+      }
+
+      to {
+        background-position: 400% center
+      }
+    }
+
+    .header-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      opacity: .8;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      background: var(--gg);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 6s linear infinite;
+      margin-bottom: 12px;
+    }
+
+    header .subtitle {
+      font-size: 13px;
+      color: var(--tx3);
+      letter-spacing: 1px;
+    }
+
+    /* ── NAV TABS ── */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      padding: 32px 40px 0;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--tx3);
+      padding: 10px 24px;
+      border: 1px solid transparent;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all .3s;
+      background: none;
+    }
+
+    .tab:hover {
+      color: var(--tx2);
+      border-color: var(--bd);
+    }
+
+    .tab.active {
+      color: var(--gold);
+      border-color: rgba(201, 162, 77, .35);
+      background: rgba(201, 162, 77, .06);
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      display: none;
+      padding: 60px 40px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      color: var(--tx);
+      margin-bottom: 8px;
+    }
+
+    .sec-lead {
+      font-size: 13px;
+      color: var(--tx3);
+      margin-bottom: 48px;
+      max-width: 520px;
+    }
+
+    /* ── ARBORESCENCE ── */
+    .tree-root {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 60px;
+    }
+
+    .tree-page {
+      position: relative;
+    }
+
+    .tree-node {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      background: var(--bg3);
+      cursor: default;
+      transition: border-color .3s, background .3s;
+      margin-bottom: 4px;
+    }
+
+    .tree-node:hover {
+      border-color: rgba(201, 162, 77, .3);
+      background: rgba(201, 162, 77, .04);
+    }
+
+    .tree-node.root-node {
+      border-color: rgba(201, 162, 77, .3);
+      background: rgba(201, 162, 77, .07);
+      margin-bottom: 24px;
+    }
+
+    .tree-node .node-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      background: rgba(201, 162, 77, .1);
+      border: 1px solid rgba(201, 162, 77, .2);
+    }
+
+    .tree-node.external .node-icon {
+      background: rgba(230, 112, 88, .08);
+      border-color: rgba(230, 112, 88, .2);
+    }
+
+    .tree-node.modal-node .node-icon {
+      background: rgba(107, 143, 174, .08);
+      border-color: rgba(107, 143, 174, .2);
+    }
+
+    .node-info {
+      flex: 1;
+    }
+
+    .node-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--tx);
+      letter-spacing: .3px;
+    }
+
+    .node-id {
+      font-size: 10px;
+      color: var(--tx3);
+      font-family: 'Courier New', monospace;
+      margin-top: 2px;
+    }
+
+    .node-type {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(201, 162, 77, .12);
+      color: var(--gold);
+      border: 1px solid rgba(201, 162, 77, .2);
+    }
+
+    .node-type.ext {
+      background: rgba(230, 112, 88, .1);
+      color: var(--terracotta);
+      border-color: rgba(230, 112, 88, .2);
+    }
+
+    .node-type.modal {
+      background: rgba(107, 143, 174, .1);
+      color: #6B8FAE;
+      border-color: rgba(107, 143, 174, .2);
+    }
+
+    /* Indented children */
+    .tree-children {
+      margin-left: 40px;
+      position: relative;
+      padding-left: 20px;
+      border-left: 1px solid var(--bd);
+      margin-bottom: 16px;
+    }
+
+    .tree-children::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(201, 162, 77, .3), transparent);
+    }
+
+    .tree-section-group {
+      margin-bottom: 6px;
+    }
+
+    /* Grid pour pages externes */
+    .ext-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .ext-card {
+      padding: 20px;
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      background: var(--bg3);
+      transition: border-color .3s, transform .3s;
+    }
+
+    .ext-card:hover {
+      border-color: rgba(230, 112, 88, .3);
+      transform: translateY(-2px);
+    }
+
+    .ext-card .ec-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .ext-card .ec-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(230, 112, 88, .1);
+      border: 1px solid rgba(230, 112, 88, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .ext-card .ec-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--tx);
+    }
+
+    .ext-card .ec-file {
+      font-size: 10px;
+      font-family: 'Courier New', monospace;
+      color: var(--terracotta);
+      margin-top: 2px;
+    }
+
+    .ext-card .ec-desc {
+      font-size: 11px;
+      color: var(--tx3);
+      line-height: 1.7;
+    }
+
+    /* ── NAVIGATION ── */
+    .nav-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .nav-bar-mock {
+      background: rgba(28, 22, 18, .95);
+      border: 1px solid rgba(201, 162, 77, .2);
+      border-radius: 14px;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .nav-logo-mock {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 800;
+      background: var(--gg);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 6s linear infinite;
+    }
+
+    .nav-links-mock {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-link-item {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--tx3);
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: all .2s;
+      cursor: default;
+    }
+
+    .nav-link-item:hover,
+    .nav-link-item.highlight {
+      color: var(--tx);
+      border-color: var(--bd);
+    }
+
+    .nav-link-item.cta {
+      background: rgba(201, 162, 77, .1);
+      border-color: rgba(201, 162, 77, .3);
+      color: var(--gold);
+    }
+
+    .nav-controls-mock {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-ctrl {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(201, 162, 77, .3);
+      color: var(--gold);
+      background: rgba(201, 162, 77, .06);
+    }
+
+    /* Anchor map */
+    .anchor-map {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .anchor-item {
+      padding: 16px;
+      border: 1px solid var(--bd);
+      border-radius: 10px;
+      background: var(--bg3);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .anchor-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      font-family: 'Courier New', monospace;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .anchor-info {}
+
+    .anchor-id {
+      font-size: 10px;
+      font-family: 'Courier New', monospace;
+      color: var(--terracotta);
+      margin-bottom: 3px;
+    }
+
+    .anchor-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--tx2);
+    }
+
+    .anchor-desc {
+      font-size: 10px;
+      color: var(--tx3);
+      margin-top: 3px;
+      line-height: 1.6;
+    }
+
+    /* Footer nav */
+    .footer-nav-cols {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .fnc {
+      padding: 20px;
+      border: 1px solid var(--bd);
+      border-radius: 10px;
+      background: var(--bg3);
+    }
+
+    .fnc-title {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .fnc-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .fnc-link {
+      font-size: 11px;
+      color: var(--tx3);
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(242, 237, 232, .05);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fnc-link::before {
+      content: '→';
+      color: var(--gold);
+      font-size: 9px;
+      opacity: .5;
+    }
+
+    /* ── USERFLOW ── */
+    .flow-container {
+      position: relative;
+    }
+
+    .flow-title-section {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 48px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .flow-title-section::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(201, 162, 77, .2);
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .flow-step {
+      flex-shrink: 0;
+      width: 168px;
+      padding: 16px;
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      background: var(--bg3);
+      position: relative;
+      transition: border-color .3s;
+    }
+
+    .flow-step:hover {
+      border-color: rgba(201, 162, 77, .3);
+    }
+
+    .flow-step.step-start {
+      border-color: rgba(201, 162, 77, .35);
+      background: rgba(201, 162, 77, .06);
+    }
+
+    .flow-step.step-action {
+      border-color: var(--bd);
+    }
+
+    .flow-step.step-decision {
+      border-color: rgba(230, 112, 88, .25);
+      background: rgba(230, 112, 88, .04);
+    }
+
+    .flow-step.step-end {
+      border-color: rgba(90, 160, 100, .3);
+      background: rgba(90, 160, 100, .06);
+    }
+
+    .flow-step.step-error {
+      border-color: rgba(200, 80, 80, .25);
+      background: rgba(200, 80, 80, .04);
+    }
+
+    .flow-step.step-system {
+      border-color: rgba(107, 143, 174, .25);
+      background: rgba(107, 143, 174, .04);
+    }
+
+    .fs-icon {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .fs-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--tx);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .fs-desc {
+      font-size: 10px;
+      color: var(--tx3);
+      line-height: 1.5;
+    }
+
+    .fs-type {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 8px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .fs-type.t-start {
+      background: rgba(201, 162, 77, .15);
+      color: var(--gold);
+    }
+
+    .fs-type.t-action {
+      background: rgba(242, 237, 232, .07);
+      color: var(--tx3);
+    }
+
+    .fs-type.t-decision {
+      background: rgba(230, 112, 88, .12);
+      color: var(--terracotta);
+    }
+
+    .fs-type.t-end {
+      background: rgba(90, 160, 100, .12);
+      color: #5AA064;
+    }
+
+    .fs-type.t-error {
+      background: rgba(200, 80, 80, .12);
+      color: #C85050;
+    }
+
+    .fs-type.t-system {
+      background: rgba(107, 143, 174, .12);
+      color: #6B8FAE;
+    }
+
+    .flow-arrow {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+      color: var(--tx3);
+      font-size: 14px;
+    }
+
+    .flow-arrow.branch {
+      color: var(--terracotta);
+    }
+
+    /* vertical connector */
+    .flow-down {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, rgba(201, 162, 77, .3), transparent);
+      margin: 0 auto 0 24px;
+    }
+
+    .flow-branches {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .branch-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 6px;
+    }
+
+    .branch-label.ok {
+      color: #5AA064;
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 48px;
+      padding: 24px;
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      background: var(--bg3);
+    }
+
+    .legend-title {
+      width: 100%;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--tx3);
+      margin-bottom: 4px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--tx3);
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--bd);
+      margin: 48px 0;
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(201, 162, 77, .1);
+      border: 1px solid rgba(201, 162, 77, .25);
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      header {
+        padding: 60px 24px 48px;
+      }
+
+      .section {
+        padding: 40px 24px 60px;
+      }
+
+      .tabs {
+        padding: 24px 24px 0;
+      }
+
+      .nav-bar-mock {
+        padding: 14px 18px;
+      }
+
+      .nav-links-mock {
+        gap: 8px;
+      }
+
+      .anchor-map {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .anchor-map {
+        grid-template-columns: 1fr;
+      }
+
+      .ext-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-nav-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="gbar"></div>
+
+  <header>
+    <div class="header-eyebrow">Documentation · UX Architecture</div>
+    <h1>Pétales de Sucre</h1>
+    <p class="subtitle">Arborescence · Navigation · Userflow — Bouquets de crêpes artisanaux · Dumbéa, NC</p>
+  </header>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="showSection('arbo')">🌿 Arborescence</button>
+    <button class="tab" onclick="showSection('nav')">🧭 Navigation</button>
+    <button class="tab" onclick="showSection('flow')">🔄 Userflow</button>
+  </div>
+
+  <!-- ══════════════════════ ARBORESCENCE ══════════════════════ -->
+  <div class="section active" id="arbo">
+    <p class="badge">Vue d'ensemble</p>
+    <h2 class="sec-title">Arborescence du site</h2>
+    <p class="sec-lead">Site one-page avec ancres de navigation + 6 pages externes statiques. Toutes les sections vivent
+      dans un seul fichier HTML ; les pages légales sont des fichiers séparés accessibles depuis le footer.</p>
+
+    <!-- Page principale -->
+    <div class="tree-root">
+
+      <div class="tree-node root-node">
+        <div class="node-info">
+          <div class="node-name">site Petales de Sucre</div>
+          <div class="node-id">One-page </div>
+        </div>
+        <div class="node-type">Page principale</div>
+      </div>
+
+      <div class="tree-children">
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">Hero</div>
+              <div class="node-id">#hero</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">Concept</div>
+              <div class="node-id">#concept</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">Processus de confection</div>
+              <div class="node-id">#processus · 4 étapes</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">Boutique — 3 produits</div>
+              <div class="node-id">#boutique · Le Raffiné / Le Classique / Le Prestige</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">Configurateur interactif</div>
+              <div class="node-id">#config · SVG dynamique + 6 étapes de personnalisation</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+          <div class="tree-children" style="margin-top:6px;">
+            <div class="tree-node" style="margin-bottom:4px;">
+              <div class="node-icon" style="width:28px;height:28px;font-size:12px;">1</div>
+              <div class="node-info">
+                <div class="node-name" style="font-size:12px;">Choix du format</div>
+                <div class="node-id">Raffiné · Classique · Prestige</div>
+              </div>
+            </div>
+            <div class="tree-node" style="margin-bottom:4px;">
+              <div class="node-icon" style="width:28px;height:28px;font-size:12px;">2</div>
+              <div class="node-info">
+                <div class="node-name" style="font-size:12px;">Parfum</div>
+                <div class="node-id">Vanille · Chocolat noir · Nature</div>
+              </div>
+            </div>
+            <div class="tree-node" style="margin-bottom:4px;">
+              <div class="node-icon" style="width:28px;height:28px;font-size:12px;">3</div>
+              <div class="node-info">
+                <div class="node-name" style="font-size:12px;">Fourrage</div>
+                <div class="node-id">Vanille · Chocolat · Caramel · Fruits rouges · Pistache</div>
+              </div>
+            </div>
+            <div class="tree-node" style="margin-bottom:4px;">
+              <div class="node-icon" style="width:28px;height:28px;font-size:12px;">4</div>
+              <div class="node-info">
+                <div class="node-name" style="font-size:12px;">Couleur du ruban</div>
+                <div class="node-id">7 coloris disponibles</div>
+              </div>
+            </div>
+            <div class="tree-node" style="margin-bottom:4px;">
+              <div class="node-icon" style="width:28px;height:28px;font-size:12px;">5</div>
+              <div class="node-info">
+                <div class="node-name" style="font-size:12px;">Créneau de retrait</div>
+                <div class="node-id">Calendrier interactif + créneaux horaires</div>
+              </div>
+            </div>
+            <div class="tree-node">
+              <div class="node-icon" style="width:28px;height:28px;font-size:12px;">6</div>
+              <div class="node-info">
+                <div class="node-name" style="font-size:12px;">Paiement sécurisé</div>
+                <div class="node-id">Formulaire CB + cases à cocher RGPD</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node modal-node">
+            <div class="node-info">
+              <div class="node-name">Modal — Confirmation de commande</div>
+              <div class="node-id">#orderModal · Récapitulatif + notification SMS/email</div>
+            </div>
+            <div class="node-type modal">Modal overlay</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">FAQ (extrait — 4 questions)</div>
+              <div class="node-id">#faq · Délai · Allergènes · Conservation · Personnalisation</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">Notre Histoire</div>
+              <div class="node-id">#histoire · Fondatrice + 3 valeurs (Authenticité, Poésie, Excellence)</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">Témoignages</div>
+              <div class="node-id">#temoignages · 3 avis clients</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">Offre Entreprises</div>
+              <div class="node-id">#entreprises · Événements / Cadeaux clients / Hôtels</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">Fil Instagram</div>
+              <div class="node-id">#instagram · 6 photos + lien @PetalesdeSucreNC</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node">
+            <div class="node-info">
+              <div class="node-name">Formulaire Devis / Contact</div>
+              <div class="node-id">#devis · Nom · Tel · Email · Date · Format · Mode de retrait · Message</div>
+            </div>
+            <div class="node-type">Section</div>
+          </div>
+        </div>
+
+        <div class="tree-section-group">
+          <div class="tree-node" style="border-color:rgba(106,96,80,.3)">
+            <div class="node-info">
+              <div class="node-name">Footer</div>
+              <div class="node-id">Logo · Newsletter · Réseaux sociaux · Liens · Contact · Carte Google Maps</div>
+            </div>
+            <div class="node-type">Footer</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Pages externes -->
+    <div class="divider"></div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px;color:var(--tx)">Pages externes
+    </h3>
+
+    <div class="ext-grid">
+      <div class="ext-card">
+        <div class="ec-header">
+          <div>
+            <div class="ec-name">Clic & Collect</div>
+            <div class="ec-file">click-and-collect.html</div>
+          </div>
+        </div>
+        <div class="ec-desc">Informations sur le mode de retrait en atelier à Dumbéa : modalités, horaires, adresse.
+        </div>
+      </div>
+      <div class="ext-card">
+        <div class="ec-header">          <div>
+            <div class="ec-name">FAQ complète</div>
+            <div class="ec-file">faq.html</div>
+          </div>
+        </div>
+        <div class="ec-desc">Version étendue de la FAQ. Accessible via le bouton "Voir toutes les questions" dans la
+          section FAQ du site.</div>
+      </div>
+      <div class="ext-card">
+        <div class="ec-header">
+          <div>
+            <div class="ec-name">Politique de retour</div>
+            <div class="ec-file">politique-retour.html</div>
+          </div>
+        </div>
+        <div class="ec-desc">Conditions de retour et remboursement. Référencée dans les cases à cocher du paiement.
+        </div>
+      </div>
+      <div class="ext-card">
+        <div class="ec-header">
+          <div>
+            <div class="ec-name">Mentions légales</div>
+            <div class="ec-file">mentions-legales.html</div>
+          </div>
+        </div>
+        <div class="ec-desc">Éditeur, hébergeur, propriété intellectuelle. Lien footer uniquement.</div>
+      </div>
+      <div class="ext-card">
+        <div class="ec-header">
+          <div>
+            <div class="ec-name">Conditions de vente</div>
+            <div class="ec-file">conditions-vente.html</div>
+          </div>
+        </div>
+        <div class="ec-desc">CGV complètes : commandes, prix, paiement, livraison, responsabilités.</div>
+      </div>
+      <div class="ext-card">
+        <div class="ec-header">
+          <div>
+            <div class="ec-name">Politique RGPD</div>
+            <div class="ec-file">rgpd.html</div>
+          </div>
+        </div>
+        <div class="ec-desc">Données personnelles, cookies, droits utilisateurs. Lien dans le formulaire de paiement et
+          le footer.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ NAVIGATION ══════════════════════ -->
+  <div class="section" id="nav">
+    <p class="badge">Navigation du site</p>
+    <h2 class="sec-title">Barre de navigation principale</h2>
+    <p class="sec-lead">Navbar fixe en haut de page, transparente au départ puis effet verre dépoli au scroll. Contient
+      5 liens d'ancres, un CTA "Commander" et deux contrôles globaux (langue + thème).</p>
+
+    <div class="nav-diagram">
+      <div class="nav-bar-mock">
+        <div class="nav-logo-mock">Pétales de Sucre</div>
+        <div class="nav-links-mock">
+          <span class="nav-link-item">Boutique</span>
+          <span class="nav-link-item">Configurateur</span>
+          <span class="nav-link-item">Notre Histoire</span>
+          <span class="nav-link-item">Entreprises</span>
+          <span class="nav-link-item cta">Commander</span>
+        </div>
+        <div class="nav-controls-mock">
+          <span class="nav-ctrl">FR | EN</span>
+          <span class="nav-ctrl">🌙 Prestige</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:20px;color:var(--tx)">Carte des ancres
+      — sections accessibles</h3>
+
+    <div class="anchor-map">
+      <div class="anchor-item">
+        <div class="anchor-num">01</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#hero</div>
+          <div class="anchor-label">Accueil / Hero</div>
+          <div class="anchor-desc">Point d'entrée. CTA "Créer mon bouquet" → #boutique</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">02</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#concept</div>
+          <div class="anchor-label">Le Concept</div>
+          <div class="anchor-desc">Présentation de la marque, 3 piliers</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">03</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#processus</div>
+          <div class="anchor-label">Processus</div>
+          <div class="anchor-desc">Confection en 4 étapes</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">04</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#boutique</div>
+          <div class="anchor-label">Boutique</div>
+          <div class="anchor-desc">3 produits avec CTA → #config</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">05</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#config</div>
+          <div class="anchor-label">Configurateur</div>
+          <div class="anchor-desc">6 étapes + paiement intégré</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">06</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#faq</div>
+          <div class="anchor-label">FAQ (extrait)</div>
+          <div class="anchor-desc">4 questions + lien → faq.html</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">07</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#histoire</div>
+          <div class="anchor-label">Notre Histoire</div>
+          <div class="anchor-desc">Fondatrice + 3 valeurs</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">08</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#temoignages</div>
+          <div class="anchor-label">Témoignages</div>
+          <div class="anchor-desc">3 avis clients 5 étoiles</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">09</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#entreprises</div>
+          <div class="anchor-label">Entreprises</div>
+          <div class="anchor-desc">Offre pro + CTA → #devis</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">10</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#instagram</div>
+          <div class="anchor-label">Instagram</div>
+          <div class="anchor-desc">6 publications + lien externe</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">11</div>
+        <div class="anchor-info">
+          <div class="anchor-id">#devis</div>
+          <div class="anchor-label">Formulaire Contact</div>
+          <div class="anchor-desc">Devis pro & commandes spéciales</div>
+        </div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-num">12</div>
+        <div class="anchor-info">
+          <div class="anchor-id">footer</div>
+          <div class="anchor-label">Footer</div>
+          <div class="anchor-desc">Newsletter + liens pages légales</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:20px;color:var(--tx)">Navigation Footer
+    </h3>
+
+    <div class="footer-nav-cols">
+      <div class="fnc">
+        <div class="fnc-title">Navigation</div>
+        <div class="fnc-links">
+          <span class="fnc-link">Notre Boutique → #boutique</span>
+          <span class="fnc-link">Configurateur → #config</span>
+          <span class="fnc-link">Notre Histoire → #histoire</span>
+          <span class="fnc-link">Entreprises → #entreprises</span>
+          <span class="fnc-link">Commander → #config</span>
+        </div>
+      </div>
+      <div class="fnc">
+        <div class="fnc-title">Informations</div>
+        <div class="fnc-links">
+          <span class="fnc-link">Clic & Collect → click-and-collect.html</span>
+          <span class="fnc-link">FAQ → faq.html</span>
+          <span class="fnc-link">Politique de retour → politique-retour.html</span>
+          <span class="fnc-link">Mentions légales → mentions-legales.html</span>
+          <span class="fnc-link">Conditions de vente → conditions-vente.html</span>
+          <span class="fnc-link">RGPD → rgpd.html</span>
+        </div>
+      </div>
+      <div class="fnc">
+        <div class="fnc-title">Réseaux sociaux</div>
+        <div class="fnc-links">
+          <span class="fnc-link">Instagram (lien externe)</span>
+          <span class="fnc-link">Facebook (lien externe)</span>
+          <span class="fnc-link">TikTok (lien externe)</span>
+        </div>
+      </div>
+      <div class="fnc">
+        <div class="fnc-title">Contact</div>
+        <div class="fnc-links">
+          <span class="fnc-link">www.PetaleDeSucre.nc</span>
+          <span class="fnc-link">Carte Google Maps</span>
+          <span class="fnc-link">Atelier Dumbéa (sur RDV)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ USERFLOW ══════════════════════ -->
+  <div class="section" id="flow">
+    <p class="badge">Parcours utilisateur</p>
+    <h2 class="sec-title">Userflow principal</h2>
+    <p class="sec-lead">Deux parcours principaux : le client particulier qui commande en ligne, et l'entreprise/pro qui
+      soumet un devis. Les deux convergent vers une confirmation.</p>
+
+    <!-- FLOW 1 -->
+    <div class="flow-title-section">Parcours 1 — Client particulier · Commande directe</div>
+
+    <div class="flow-row">
+      <div class="flow-step step-start">
+        <div class="fs-icon">🌐</div>
+        <div class="fs-label">Arrivée sur le site</div>
+        <div class="fs-desc">Découverte · Réseaux sociaux · Bouche à oreille · Recherche Google</div>
+        <div class="fs-type t-start">Entrée</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action">
+        <div class="fs-icon">✨</div>
+        <div class="fs-label">Hero</div>
+        <div class="fs-desc">Découverte de la marque · Lecture du pitch · Scroll ou CTA cliqué</div>
+        <div class="fs-type t-action">Lecture</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action">
+        <div class="fs-icon">💡</div>
+        <div class="fs-label">Concept & Processus</div>
+        <div class="fs-desc">Comprendre la valeur · Les 4 étapes de confection</div>
+        <div class="fs-type t-action">Découverte</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action">
+        <div class="fs-icon">🛍️</div>
+        <div class="fs-label">Boutique</div>
+        <div class="fs-desc">Comparaison des 3 formats · Prix · Fourrages</div>
+        <div class="fs-type t-action">Choix produit</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-decision">
+        <div class="fs-icon">🤔</div>
+        <div class="fs-label">Décision d'achat</div>
+        <div class="fs-desc">Le client est-il convaincu ?</div>
+        <div class="fs-type t-decision">Décision</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:32px;margin:0 0 16px 320px;">
+      <div>
+        <div class="branch-label">❌ Non convaincu</div>
+        <div class="flow-row" style="margin-bottom:0">
+          <div class="flow-step step-action" style="width:150px">
+            <div class="fs-icon">⭐</div>
+            <div class="fs-label">Témoignages</div>
+            <div class="fs-desc">Lecture des avis clients · Réassurance</div>
+            <div class="fs-type t-action">Réassurance</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step step-action" style="width:150px">
+            <div class="fs-icon">❓</div>
+            <div class="fs-label">FAQ</div>
+            <div class="fs-desc">Délai · Allergènes · Conservation</div>
+            <div class="fs-type t-action">Info</div>
+          </div>
+          <div class="flow-arrow" style="color:var(--gold)">↺</div>
+          <div class="flow-step step-action" style="width:130px;border-color:rgba(201,162,77,.3)">
+            <div class="fs-icon">🔄</div>
+            <div class="fs-label">Retour boutique</div>
+            <div class="fs-desc">Nouvelle lecture · Décision</div>
+            <div class="fs-type t-action">Boucle</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-left:530px;margin-bottom:16px;">
+      <div class="branch-label ok">✅ Oui, je commande</div>
+    </div>
+
+    <div class="flow-row">
+      <div class="flow-step step-action" style="width:155px">
+        <div class="fs-icon">🎨</div>
+        <div class="fs-label">Configurateur — Format</div>
+        <div class="fs-desc">Raffiné (3 000 F) · Classique (6 000 F) · Prestige (9 000 F)</div>
+        <div class="fs-type t-action">Étape 1</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action" style="width:155px">
+        <div class="fs-icon">🌸</div>
+        <div class="fs-label">Parfum</div>
+        <div class="fs-desc">Vanille · Chocolat · Rose · Pistache · Citron</div>
+        <div class="fs-type t-action">Étape 2</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action" style="width:155px">
+        <div class="fs-icon">🍫</div>
+        <div class="fs-label">Fourrage</div>
+        <div class="fs-desc">Vanille · Chocolat · Caramel · Noisette · Fruits rouges</div>
+        <div class="fs-type t-action">Étape 3</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action" style="width:155px">
+        <div class="fs-icon">🎀</div>
+        <div class="fs-label">Couleur ruban</div>
+        <div class="fs-desc">7 coloris disponibles · Mise à jour SVG temps réel</div>
+        <div class="fs-type t-action">Étape 4</div>
+      </div>
+    </div>
+
+    <div class="flow-row">
+      <div class="flow-step step-action" style="width:165px">
+        <div class="fs-icon">📅</div>
+        <div class="fs-label">Créneau de retrait</div>
+        <div class="fs-desc">Calendrier interactif · Sélection jour + heure · Créneaux pris grisés</div>
+        <div class="fs-type t-action">Étape 5</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action" style="width:165px">
+        <div class="fs-icon">💳</div>
+        <div class="fs-label">Paiement sécurisé</div>
+        <div class="fs-desc">Saisie CB · Visa / MC / Amex / PayPal · SSL 256 bits</div>
+        <div class="fs-type t-action">Étape 6</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action" style="width:165px">
+        <div class="fs-icon">☑️</div>
+        <div class="fs-label">Cases RGPD</div>
+        <div class="fs-desc">3 cases obligatoires · Confidentialité · Paiement · Retour</div>
+        <div class="fs-type t-action">Consentement</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-decision" style="width:155px">
+        <div class="fs-icon">✔️</div>
+        <div class="fs-label">Validation</div>
+        <div class="fs-desc">Vérification des saisies et cases cochées</div>
+        <div class="fs-type t-decision">Contrôle</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:32px;margin:0 0 16px 490px;">
+      <div>
+        <div class="branch-label">❌ Erreur / manquant</div>
+        <div class="flow-row" style="margin-bottom:0">
+          <div class="flow-step step-error" style="width:160px">
+            <div class="fs-icon">⚠️</div>
+            <div class="fs-label">Toast d'erreur</div>
+            <div class="fs-desc">Message non-bloquant · Retour au champ concerné</div>
+            <div class="fs-type t-error">Erreur</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-left:642px;margin-bottom:16px;">
+      <div class="branch-label ok">✅ Tout est OK</div>
+    </div>
+
+    <div class="flow-row">
+      <div class="flow-step step-system">
+        <div class="fs-icon">⚙️</div>
+        <div class="fs-label">Traitement commande</div>
+        <div class="fs-desc">Paiement traité · Commande enregistrée · Email & SMS envoyés</div>
+        <div class="fs-type t-system">Système</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-end">
+        <div class="fs-icon">✅</div>
+        <div class="fs-label">Modal confirmation</div>
+        <div class="fs-desc">Récapitulatif complet · Format · Parfum · Fourrage · Créneau · Total</div>
+        <div class="fs-type t-end">Succès</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-end">
+        <div class="fs-icon">📧</div>
+        <div class="fs-label">Confirmation Email + SMS</div>
+        <div class="fs-desc">Envoi automatique au client</div>
+        <div class="fs-type t-end">Notification</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-end">
+        <div class="fs-icon">🏪</div>
+        <div class="fs-label">Retrait atelier</div>
+        <div class="fs-desc">Clic & Collect · Dumbéa · Au créneau choisi</div>
+        <div class="fs-type t-end">Fin</div>
+      </div>
+    </div>
+
+    <!-- FLOW 2 -->
+    <div class="divider"></div>
+    <div class="flow-title-section">Parcours 2 — Client entreprise / Devis pro</div>
+
+    <div class="flow-row">
+      <div class="flow-step step-start">
+        <div class="fs-icon">🏢</div>
+        <div class="fs-label">Découverte offre pro</div>
+        <div class="fs-desc">Navigation vers #entreprises · Via navbar ou scroll</div>
+        <div class="fs-type t-start">Entrée</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action">
+        <div class="fs-icon">📋</div>
+        <div class="fs-label">Section Entreprises</div>
+        <div class="fs-desc">Événements · Cadeaux clients · Hôtels & Partenaires</div>
+        <div class="fs-type t-action">Lecture</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action">
+        <div class="fs-icon">📝</div>
+        <div class="fs-label">Formulaire Devis</div>
+        <div class="fs-desc">CTA "Demander un devis pro" → #devis · Remplissage du formulaire</div>
+        <div class="fs-type t-action">Formulaire</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-system">
+        <div class="fs-icon">📤</div>
+        <div class="fs-label">Envoi demande</div>
+        <div class="fs-desc">Toast de confirmation · Bouton vert "Envoyé !"</div>
+        <div class="fs-type t-system">Système</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-end">
+        <div class="fs-icon">⏱️</div>
+        <div class="fs-label">Réponse sous 24h</div>
+        <div class="fs-desc">L'équipe Pétales de Sucre recontacte le client pro</div>
+        <div class="fs-type t-end">Fin</div>
+      </div>
+    </div>
+
+    <!-- FLOW 3 -->
+    <div class="flow-title-section">Parcours 3 — Newsletter & Fidélisation</div>
+
+    <div class="flow-row">
+      <div class="flow-step step-action">
+        <div class="fs-icon">🦶</div>
+        <div class="fs-label">Scroll jusqu'au footer</div>
+        <div class="fs-desc">Fin de navigation · Visite complète du site</div>
+        <div class="fs-type t-action">Navigation</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action">
+        <div class="fs-icon">📨</div>
+        <div class="fs-label">Champ newsletter</div>
+        <div class="fs-desc">Saisie de l'email · Bouton ✦</div>
+        <div class="fs-type t-action">Saisie</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-end">
+        <div class="fs-icon">✓</div>
+        <div class="fs-label">Inscription confirmée</div>
+        <div class="fs-desc">Message "Vous êtes inscrite !" · Toast · Formulaire réinitialisé</div>
+        <div class="fs-type t-end">Succès</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step step-action">
+        <div class="fs-icon">📱</div>
+        <div class="fs-label">Réseaux sociaux</div>
+        <div class="fs-desc">Instagram · Facebook · TikTok → liens externes</div>
+        <div class="fs-type t-action">Fidélisation</div>
+      </div>
+    </div>
+
+    <!-- LÉGENDE -->
+    <div class="legend">
+      <div class="legend-title">Légende</div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(201,162,77,.4);border:1px solid rgba(201,162,77,.5)"></div>
+        Point d'entrée / Début
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(242,237,232,.1);border:1px solid rgba(242,237,232,.2)"></div>
+        Action utilisateur
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(230,112,88,.15);border:1px solid rgba(230,112,88,.3)"></div>
+        Décision / Branchement
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(107,143,174,.15);border:1px solid rgba(107,143,174,.3)"></div>
+        Action système (automatique)
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(90,160,100,.15);border:1px solid rgba(90,160,100,.3)"></div>
+        Fin / Confirmation / Succès
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(200,80,80,.15);border:1px solid rgba(200,80,80,.3)"></div>
+        Erreur / État bloquant
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div style="height:1px;background:var(--bd);margin-top:80px;"></div>
+  <div
+    style="text-align:center;padding:32px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);">
+    © 2026 Pétales de Sucre · Documentation UX · Coco DesigNC
+  </div>
+  <div class="gbar"></div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+
+</html>
